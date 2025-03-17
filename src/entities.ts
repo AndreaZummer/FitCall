@@ -5,7 +5,7 @@ export interface Exercise {
     description: string;
     detail: string;
     imageURL: string;
-    bodyPart: "brucho" | "ruky" | "nohy" | "zadok" | "celé telo" | "kondička";
+    bodyPart: ("brucho" | "ruky" | "nohy" | "zadok" | "kondička") [];
     time: number;
     difficulty: "ľahké" | "stredné" | "ťažké"; 
     series: number;
