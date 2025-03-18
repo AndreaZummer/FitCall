@@ -1,15 +1,20 @@
 import './App.css';
-import { Route, Routes, RouterProvider, createBrowserRouter, createRoutesFromElements} from 'react-router-dom';
-import Header from './components/Header';
+import { Route, RouterProvider, createBrowserRouter, createRoutesFromElements} from 'react-router-dom';
 import Login from './components/Login';
+import LandingPage from './components/LandingPage';
+import SignUp from './components/SignUp';
 
 const router = createBrowserRouter(createRoutesFromElements([
-  <Route path='/' element={<Header/>}>
+  <Route path='/' element={<LandingPage/>}>
     <Route path='login' element={<Login/>}/>
-  </Route>
+    <Route path='signup' element={<SignUp/>}/>
+  </Route>,
+  <Route path=':username' element={<LandingPage/>}/> 
 ]));
 
-function App(): React.FC {
-  return <RouterProvider router={router}/>
-}
+function App() {
+  return (
+    <RouterProvider router={router}/>
+
+)}
 export default App;
