@@ -1,0 +1,93 @@
+.app-header {
+    width: 100%;
+    position: fixed;
+    display: flex;
+    justify-content: space-between;
+    background-color: #FFEE00;
+}
+
+#logo {
+    width: 10%;
+    height: auto;
+    padding-left: 6%;
+}
+
+.header-svgs {
+    width: 3%;
+    height: auto;
+    position: absolute;
+    opacity: .3;
+}
+
+#stop {
+    translate: 2580% 70%;
+    transform: rotate(30deg);
+}
+
+#bag {
+    translate: 750% 140%;
+    transform: rotate(-10deg);
+}
+
+#watch {
+    translate: 1140% 70%;
+    transform: rotate(10deg);
+}
+
+#dumbell {
+    translate: 1600% 180%;
+    transform: rotate(10deg);
+}
+
+#shoe {
+    translate: 2080% 130%;
+    transform: rotate(-5deg);
+}
+
+.sign {
+    width: 13%;
+    display: flex;
+    flex-direction: column;
+}
+
+.login {
+    font-size: 1rem;
+    font-weight: 700;
+    width: 70%;
+    margin: 20% 5% 3%;
+    height: 36%;
+    padding: 1%;
+    background-color: #8314c8ec;
+    color: #fff;
+}
+
+.login:hover {
+    background-color: #000000ee;
+}
+
+.sign p {
+    margin: 0 auto;
+    padding-left: 15%;
+    width: 50%;
+    font-size: .85rem;
+}
+
+#signUp {
+    font-size: .95rem;
+    font-weight: 600;
+    margin: 2% 0 3% 15%;
+    border-bottom: 2px solid #000;
+    width: 50%;
+    height: 11%;
+    text-align: center;
+}
+
+#signUp:hover {
+    cursor: pointer;
+    font-weight: 900;
+    border-bottom: transparent;
+}
+
+body {
+    background-color: black;
+}
