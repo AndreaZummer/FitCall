@@ -1,0 +1,49 @@
+.home {
+    width: 90%;
+    margin: 0 auto;
+    padding-top: 14%;
+    padding-bottom: 2%;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+}
+
+.choiceColumn {
+    background-color: #ffffffd4;
+    border-radius: 5%;
+    width: 30%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.choiceColumn h2 {
+    font-size: 2.1vw;
+    padding: 7%;
+    border-bottom: 2px solid #8314c8ec;
+}
+
+.choiceColumn button {
+    width: 50%;
+    padding-top: 2%;
+    padding-bottom: 2%;
+    margin-top: 10%;
+    margin-bottom: 10%;
+}
+
+.choiceColumn ul {
+    padding: 8%;
+}
+
+.choiceColumn li {
+    padding: 8%;
+    list-style-type: none;
+    font-size: 1.2vw;
+    font-weight: 600;
+}
+
+.choiceColumn li::before {
+    content: '\2714';
+    padding-right: 5%;
+}

@@ -21,13 +21,13 @@
 .slides h2 {
     width: 50%;
     color: #FFEE00;
-    font-family: "IBM Plex Sans", sans-serif;
-    font-size: 50px;
+    font-family: "Poppins", sans-serif;
+    font-size: 3vw;
     text-align: center;
 }
 
 #stretching, #weighlift {
-    font-size: 44px;
+    font-size: 2.5vw;
 }
 
 .text {
@@ -40,19 +40,20 @@
 
 .text p {
     color: #FFEE00;
-    font-size: 26px;
+    font-size: 1.7vw;
     text-align: center;
     padding: 3%;
 }
 
 .fitCall {
     color:#8314c8ec;
+    font-family: "Josefin Sans", sans-serif;
 }
 
 #registrationButton {
     width: 50%;
     padding: 3%;
-    font-size: 20px;
+    font-size: 1.3vw;
     letter-spacing: .5px;
     margin: 10% 0;
 }

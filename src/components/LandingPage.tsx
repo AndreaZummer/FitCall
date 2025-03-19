@@ -8,9 +8,11 @@ function LandingPage() {
 
     return (
         <div className="landing">
-            <Header/>
-            <Outlet/>
-            <LandingPresentation />
+            <main>
+                <Header/>
+                <Outlet/>
+                <LandingPresentation />
+            </main>
             <Footer/>
         </div>
 )}

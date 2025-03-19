@@ -9,6 +9,15 @@ body {
     height: 100%;
 }
 
+.landing {
+    display: flex;
+    flex-direction: column;
+}
+
+main {
+    flex-grow: 1;
+}
+
 button {
     border: 1px solid black;
     border-radius: 25px;

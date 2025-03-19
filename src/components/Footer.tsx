@@ -7,7 +7,7 @@ import '../styles/Footer.css';
 
 function Footer() {
     return (
-        <div className="footer">
+        <footer>
             <div className="sponsors">
                 <h4>V spolupráci s:</h4>
                 <div className="sponsorsImages">
@@ -30,9 +30,7 @@ function Footer() {
                 </p>
                 <span id='mail'>fitCall@fitcall.sk</span>
             </div>
-        </div>
-            
-        
+        </footer>  
     )
 }
 

@@ -1,6 +1,7 @@
-.footer {
+footer {
     width: 100%;
     background-color: #FFEE00;
+    font-size: 1vw;
     display: flex;
     justify-content: center;
     align-items: center;
