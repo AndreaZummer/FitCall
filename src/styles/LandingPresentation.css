@@ -1,0 +1,65 @@
+.presentation {
+    margin: 0 auto;
+    width: 80%;
+} 
+
+.slides {
+    display: flex;
+    align-items: center;
+    margin-bottom: 5%;
+}
+
+.crunch {
+    padding-top: 14%;
+}
+
+.slides img {
+    width: 50%;
+    border: 1px solid #8314c8ec;
+}
+
+.slides h2 {
+    width: 50%;
+    color: #FFEE00;
+    font-family: "IBM Plex Sans", sans-serif;
+    font-size: 50px;
+    text-align: center;
+}
+
+#stretching, #weighlift {
+    font-size: 44px;
+}
+
+.text {
+    align-self: start;
+}
+
+.text  h2 {
+    width: 100%;
+}
+
+.text p {
+    color: #FFEE00;
+    font-size: 26px;
+    text-align: center;
+    padding: 3%;
+}
+
+.fitCall {
+    color:#8314c8ec;
+}
+
+#registrationButton {
+    width: 50%;
+    padding: 3%;
+    font-size: 20px;
+    letter-spacing: .5px;
+    margin: 10% 0;
+}
+
+.registration {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}

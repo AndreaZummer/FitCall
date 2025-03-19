@@ -44,7 +44,7 @@ function SignUp() {
             <button onClick={loginClose}>X</button>
                 <form className="loginForm" onSubmit={handleLoginSubmit}>
                     <input type="text" name='userName' placeholder="Zadajte užívateľské meno" required autoFocus={true} onChange={handleUserNameInput} value={userName}/>
-                    <input type="email" name="userMail" placeholder='Zadajte email' required pattern={/^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/.toString()}/>
+                    <input type="email" name="userMail" placeholder='Zadajte email' required pattern={/^[\w-.]+@([\w-]+\.)+[\w-]{2,4}$/.toString()}/>
                     <input type="password" name='password' required placeholder="Heslo" id='password' minLength={8} onChange={passwordHandle} value={password}/>
                     <input type="password" name='password' required placeholder="Zopakujte heslo" onChange={confirmPasswordHandle} value={confirmPassword}/>
                     <div className="terms">

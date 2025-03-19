@@ -1,14 +1,17 @@
 import { Outlet } from "react-router-dom";
 import Header from "./Header";
-import { useState } from "react";
+import Footer from "./Footer";
+import LandingPresentation from "./LandingPresentation";
 
 
 function LandingPage() {
-    
+
     return (
-        <div>
+        <div className="landing">
             <Header/>
             <Outlet/>
+            <LandingPresentation />
+            <Footer/>
         </div>
 )}
 

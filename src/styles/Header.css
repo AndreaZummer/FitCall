@@ -4,6 +4,7 @@
     display: flex;
     justify-content: space-between;
     background-color: #FFEE00;
+    z-index: 1;
 }
 
 #logo {
@@ -142,6 +143,6 @@
     margin-top: 2%;
 }
 
-body {
-    background-color: black;
+.landing {
+    height: 100%;
 }
