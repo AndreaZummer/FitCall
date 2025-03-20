@@ -2,6 +2,7 @@ import Footer from "./Footer";
 import Header from "./Header";
 import '../styles/Home.css';
 import { useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 
 function Home() {
 
@@ -9,8 +10,14 @@ function Home() {
         window.scrollTo(0,0)
     }, [])
     
+    const navigation = useNavigate();
+
+    function generateWorkoutSurprise() {
+        navigation('./surpriseworkout')
+    }
+
     return ( 
-        <div>
+        <div className="landing">
             <main>
                 <Header/>
                 <div className="home">
@@ -39,7 +46,7 @@ function Home() {
                             <li>Stále nový tréning, pri ktorom nikdy nevieš čo ťa čaká</li>
                             <li>Nepáči sa ti niektorý cvik? Tak ho vymeň!</li>
                         </ul>
-                        <button className="login">Vytvoriť tréning</button>
+                        <button className="login" onClick={generateWorkoutSurprise}>Vytvoriť tréning</button>
                     </div>
                 </div>
             </main>
