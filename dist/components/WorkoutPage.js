@@ -11,6 +11,12 @@ const listOfExercises_1 = require("../data/listOfExercises");
 const react_1 = require("react");
 const group_pilates_instructors_exercising_reformers_jpg_1 = __importDefault(require("../styles/group-pilates-instructors-exercising-reformers.jpg"));
 function WorkoutPage() {
+    const context = (0, react_router_dom_1.useOutletContext)();
+    let bodyPart = context.bodyPartSelected;
+    let time = context.timeSelected;
+    let difficulty = context.difficultySelected;
+    let equipment = context.equipmentSelected;
+    let typeOfExercise = context.intervalVsRepeatSelected;
     const params = (0, react_router_dom_1.useParams)();
     const { choice } = params;
     const { username } = params;
@@ -21,6 +27,11 @@ function WorkoutPage() {
         window.scrollTo(0, 0);
         if (choice === "surpriseworkout") {
             const [finalWorkout, intervalVsRepeat] = (0, utilities_1.workoutGenerator)(listOfExercises_1.listOfWorkouts, {});
+            setFinalWorkout(finalWorkout);
+            setIntervalVsRepeat(intervalVsRepeat);
+        }
+        if (choice === "filteredworkout") {
+            const [finalWorkout, intervalVsRepeat] = (0, utilities_1.workoutGenerator)(listOfExercises_1.listOfWorkouts, { bodyPart, time, difficulty, equipment, typeOfExercise });
             setFinalWorkout(finalWorkout);
             setIntervalVsRepeat(intervalVsRepeat);
         }

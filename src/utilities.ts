@@ -3,9 +3,9 @@ import { Exercise } from "./entities";
 type generatorProps = {
     bodyPart?: ("brucho" | "ruky" | "nohy" | "zadok" | "kondička") [];
     time?: number;
-    difficulty?: "ľahké" | "stredné" | "ťažké"; 
-    equipment?: "činky" | "expander" | "kettlebell" | "slider";
-    typeOfExercise?: "interval" | "opakovania";
+    difficulty?: ("ľahké" | "stredné" | "ťažké")[]; 
+    equipment?: ("činky" | "expander" | "kettlebell" | "slider" | "bez pomôcok")[];
+    typeOfExercise?: "interval" | "opakovania" | null;
 }
 
 export function intervalOrRepeat() {

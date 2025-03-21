@@ -1,13 +1,28 @@
 import '../styles/WorkoutPage.css';
 import { Exercise } from "../entities";
-import { useNavigate, useParams } from "react-router-dom";
+import { useNavigate, useOutletContext, useParams } from "react-router-dom";
 import { workoutGenerator } from "../utilities";
 import { listOfWorkouts } from "../data/listOfExercises";
 import { useEffect, useState } from "react";
 import background from '../styles/group-pilates-instructors-exercising-reformers.jpg';
 
+type workoutPageProperties = {
+    bodyPartSelected?: ("brucho" | "ruky" | "nohy" | "zadok" | "kondička") [];
+    timeSelected?: number;
+    difficultySelected?: ("ľahké" | "stredné" | "ťažké")[]; 
+    equipmentSelected?: ("činky" | "expander" | "kettlebell" | "slider" | "bez pomôcok")[];
+    intervalVsRepeatSelected?: "interval" | "opakovania" | null;
+}
+
 function WorkoutPage() {
 
+    const context: workoutPageProperties = useOutletContext();
+    let bodyPart = context.bodyPartSelected;
+    let time = context.timeSelected;
+    let difficulty = context.difficultySelected;
+    let equipment = context.equipmentSelected;
+    let typeOfExercise = context.intervalVsRepeatSelected;
+    
     const params = useParams();
     const {choice} = params;
     const {username} = params;
@@ -24,6 +39,13 @@ function WorkoutPage() {
             setFinalWorkout(finalWorkout);
             setIntervalVsRepeat(intervalVsRepeat);
         } 
+
+        // Filtered workout
+        if (choice === "filteredworkout") {
+            const [finalWorkout, intervalVsRepeat] = workoutGenerator(listOfWorkouts,{bodyPart, time, difficulty, equipment, typeOfExercise});
+            setFinalWorkout(finalWorkout);
+            setIntervalVsRepeat(intervalVsRepeat);
+        }
     },[choice]);
 
     function deleteExercise(indexToDelete: number) {

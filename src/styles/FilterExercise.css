@@ -45,31 +45,33 @@
 
 .selectionButtons {
     width: 60%;
-    display: flex;
-    justify-content: space-evenly;
-    /* flex-wrap: wrap; */
-    flex-direction: column;
-    align-items: center;
 }
 
-.selection button {
-    width: 28%;
-    margin: 2%;
-    padding: 3% 2%;
+.inputLabel {
+    display: flex;
+    justify-content: center;
+    width: 80%;
+}
+
+.button {
+    margin: 2% 2% 2% 10%;
+    padding: 5%;
+    width: 55%;
     border: 1px solid #ffee33;
     font-weight: 600;
+    background-color: #dad8d8;
+    border-radius: 25px;
+    text-align: center;
 }
 
-.selection button:hover {
+.button:hover {
     background-color: #000000a0;
     color: #fff;
+    cursor: pointer;
 }
 
-.selection button:visited{
-    background-color: #000000a0;
-    color: #fff;
+.inputLabel input {
+    width: 8%;
+    height: auto;
 }
 
-.selection .tooLong {
-    width: 32%;
-}

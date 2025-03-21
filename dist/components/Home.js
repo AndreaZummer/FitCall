@@ -12,6 +12,53 @@ function Home() {
     (0, react_1.useEffect)(() => {
         window.scrollTo(0, 0);
     }, []);
-    return ((0, jsx_runtime_1.jsxs)("div", { className: "landing", children: [(0, jsx_runtime_1.jsxs)("main", { children: [(0, jsx_runtime_1.jsx)(Header_1.default, {}), (0, jsx_runtime_1.jsx)(react_router_dom_1.Outlet, {})] }), (0, jsx_runtime_1.jsx)(Footer_1.default, {})] }));
+    const [bodyPartSelected, setBodyPartSelected] = (0, react_1.useState)([]);
+    const [difficultySelected, setDifficultySelected] = (0, react_1.useState)([]);
+    const [equipmentSelected, setEquipmentSelected] = (0, react_1.useState)([]);
+    const [timeSelected, setTimeSelected] = (0, react_1.useState)(0);
+    const [intervalOrRepeatSelected, setIntervalOrRepeatSelected] = (0, react_1.useState)(null);
+    function bodyPartSetup(bodyPart) {
+        if (bodyPartSelected.includes(bodyPart)) {
+            setBodyPartSelected(bodyPartSelected.filter(item => { return item !== bodyPart; }));
+        }
+        else {
+            setBodyPartSelected([...bodyPartSelected, bodyPart]);
+        }
+    }
+    function difficultySetup(difficulty) {
+        if (difficultySelected.includes(difficulty)) {
+            setDifficultySelected(difficultySelected.filter(item => { return item !== difficulty; }));
+        }
+        else {
+            setDifficultySelected([...difficultySelected, difficulty]);
+        }
+    }
+    function equipmentSetup(equipment) {
+        if (equipmentSelected.includes(equipment)) {
+            setEquipmentSelected(equipmentSelected.filter(item => { return item !== equipment; }));
+        }
+        else {
+            setEquipmentSelected([...equipmentSelected, equipment]);
+        }
+    }
+    function timeSetup(time) {
+        setTimeSelected(time);
+    }
+    function intervalOrRepeatSetup(intervalOrRepeat) {
+        setIntervalOrRepeatSelected(intervalOrRepeat);
+    }
+    const context = {
+        bodyPartSetup: bodyPartSetup,
+        difficultySetup: difficultySetup,
+        equipmentSetup: equipmentSetup,
+        timeSetup: timeSetup,
+        intervalOrRepeatSetup: intervalOrRepeatSetup,
+        bodyPartSelected: bodyPartSelected,
+        difficultySelected: difficultySelected,
+        equipmentSelected: equipmentSelected,
+        timeSelected: timeSelected,
+        intervalOrRepeatSelected: intervalOrRepeatSelected
+    };
+    return ((0, jsx_runtime_1.jsxs)("div", { className: "landing", children: [(0, jsx_runtime_1.jsxs)("main", { children: [(0, jsx_runtime_1.jsx)(Header_1.default, {}), (0, jsx_runtime_1.jsx)(react_router_dom_1.Outlet, { context: context })] }), (0, jsx_runtime_1.jsx)(Footer_1.default, {})] }));
 }
 exports.default = Home;
