@@ -12,6 +12,7 @@ type workoutPageProperties = {
     difficultySelected?: ("ľahké" | "stredné" | "ťažké")[]; 
     equipmentSelected?: ("činky" | "expander" | "kettlebell" | "slider" | "bez pomôcok")[];
     intervalVsRepeatSelected?: "interval" | "opakovania" | null;
+    reset: () => void
 }
 
 function WorkoutPage() {
@@ -30,6 +31,7 @@ function WorkoutPage() {
     const [finalWorkout, setFinalWorkout] = useState<Exercise[]> ([]);
     const [intervalVsRepeat, setIntervalVsRepeat] = useState<"interval" | "opakovania" | null> (null);
 
+
     useEffect(() => {
         
         window.scrollTo(0,0);
@@ -45,6 +47,7 @@ function WorkoutPage() {
             const [finalWorkout, intervalVsRepeat] = workoutGenerator(listOfWorkouts,{bodyPart, time, difficulty, equipment, typeOfExercise});
             setFinalWorkout(finalWorkout);
             setIntervalVsRepeat(intervalVsRepeat);
+            setTimeout(() => context.reset(), 1000)
         }
     },[choice]);
 

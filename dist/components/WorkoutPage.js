@@ -34,6 +34,7 @@ function WorkoutPage() {
             const [finalWorkout, intervalVsRepeat] = (0, utilities_1.workoutGenerator)(listOfExercises_1.listOfWorkouts, { bodyPart, time, difficulty, equipment, typeOfExercise });
             setFinalWorkout(finalWorkout);
             setIntervalVsRepeat(intervalVsRepeat);
+            setTimeout(() => context.reset(), 1000);
         }
     }, [choice]);
     function deleteExercise(indexToDelete) {

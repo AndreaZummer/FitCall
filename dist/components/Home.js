@@ -17,6 +17,13 @@ function Home() {
     const [equipmentSelected, setEquipmentSelected] = (0, react_1.useState)([]);
     const [timeSelected, setTimeSelected] = (0, react_1.useState)(0);
     const [intervalOrRepeatSelected, setIntervalOrRepeatSelected] = (0, react_1.useState)(null);
+    function reset() {
+        setBodyPartSelected([]);
+        setDifficultySelected([]);
+        setEquipmentSelected([]);
+        setTimeSelected(0);
+        setIntervalOrRepeatSelected(null);
+    }
     function bodyPartSetup(bodyPart) {
         if (bodyPartSelected.includes(bodyPart)) {
             setBodyPartSelected(bodyPartSelected.filter(item => { return item !== bodyPart; }));
@@ -57,7 +64,8 @@ function Home() {
         difficultySelected: difficultySelected,
         equipmentSelected: equipmentSelected,
         timeSelected: timeSelected,
-        intervalOrRepeatSelected: intervalOrRepeatSelected
+        intervalOrRepeatSelected: intervalOrRepeatSelected,
+        reset: reset
     };
     return ((0, jsx_runtime_1.jsxs)("div", { className: "landing", children: [(0, jsx_runtime_1.jsxs)("main", { children: [(0, jsx_runtime_1.jsx)(Header_1.default, {}), (0, jsx_runtime_1.jsx)(react_router_dom_1.Outlet, { context: context })] }), (0, jsx_runtime_1.jsx)(Footer_1.default, {})] }));
 }

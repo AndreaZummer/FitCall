@@ -22,7 +22,11 @@ export function shuffle(array:Exercise[]) {
 
 
 export function workoutGenerator(listOfWorkouts:Exercise[],{bodyPart, time, difficulty, equipment, typeOfExercise}: generatorProps): [Exercise[],("interval" | "opakovania")] {
-    let possibleWorkout: Exercise[] = [];
+    let afterTypeWorkout: Exercise[] = [];
+    let afterBodyWorkout: Exercise[] = [];
+    let afterEquipWorkout: Exercise[] = [];
+    let afterDiffWorkout: Exercise[] = [];
+    let afterTimeWorkout: Exercise[] = [];
 
     // Set of Interval exercise or repeat exercise
     if (!typeOfExercise) {
@@ -38,50 +42,85 @@ export function workoutGenerator(listOfWorkouts:Exercise[],{bodyPart, time, diff
     if(!time) {
         time = Math.random() * 24 + 9;
         time *= 60;
+    } else {
+        time *= 60
     }
 
     // Filter out only interval exercises if repeat choosen
     if (typeOfExercise === "opakovania") {
-        possibleWorkout = listOfWorkouts.filter((exercise) => {
+        afterTypeWorkout = listOfWorkouts.filter((exercise) => {
             return exercise.repeat !== undefined
         })
     } else {
-        possibleWorkout = listOfWorkouts;
+        afterTypeWorkout = listOfWorkouts;
     }
 
-
-
-
-
-
-
-
-
-
-    // Generate traning with correct time
-    function generateFinalList(possibleWorkout: Exercise[],time: number) {
-
-        shuffle(possibleWorkout);
-        let actualTime = 0;
-        let finalWorkout: Exercise[] =[];
-
-        while (actualTime<time) {
-            const itemOfList = possibleWorkout[0];
-
-            if (itemOfList === undefined) {
-                return finalWorkout;
-            } 
-            if (!finalWorkout.includes(itemOfList)) {
-                finalWorkout.push(itemOfList);
-                actualTime += itemOfList.time;
-            } else {
-                shuffle(possibleWorkout)
+    //  filter out body parts
+    
+    if (bodyPart) {
+        for (let exercise of afterTypeWorkout) {
+            for (let part of bodyPart) {
+                if (exercise.bodyPart.includes(part)) {
+                    afterBodyWorkout.push(exercise)
+                }
             }
         }
-        return finalWorkout
+    }
+
+    // filter out equipment
+
+    if (equipment) {
+        console.log(equipment)
+        for (let exercise of afterBodyWorkout) {
+            if (!exercise.equipment) {
+                afterEquipWorkout.push(exercise)
+            } else if (equipment.includes(exercise.equipment)) {
+                afterEquipWorkout.push(exercise)
+                console.log(exercise)
+            }
+        }
+    }
+
+    // filter out difficulty
+    if (difficulty?.includes("ľahké") && !difficulty.includes("ťažké")) {
+        afterDiffWorkout = afterEquipWorkout.filter((exercise) => {
+            return exercise.difficulty!=="ťažké"
+        })
+    } else if (!difficulty?.includes("ľahké") && difficulty?.includes("ťažké")) {
+        afterDiffWorkout = afterEquipWorkout.filter((exercise) => {
+            return exercise.difficulty!=="ľahké"
+        })
+    } else {
+        afterDiffWorkout = afterEquipWorkout;
+    }
+    console.log(afterDiffWorkout.length)
+
+    // Generate traning with correct time
+    function generateFinalList(afterDiffWorkout: Exercise[],time: number) {
+
+        shuffle(afterDiffWorkout);
+        let actualTime = 0;
+
+        while (actualTime<time) {
+            const itemOfList = afterDiffWorkout[0];
+
+            if (itemOfList === undefined) {
+                return afterTimeWorkout;
+            } 
+            if (!afterTimeWorkout.includes(itemOfList)) {
+                afterTimeWorkout.push(itemOfList);
+                actualTime += itemOfList.time;
+            } else {
+                shuffle(afterDiffWorkout)
+            }
+            if (actualTime<time && afterDiffWorkout.length === afterTimeWorkout.length) {
+                return afterTimeWorkout
+            }
+        }
+        return afterTimeWorkout
     };
 
-    const finalWorkout = generateFinalList(possibleWorkout,time);
+    afterTimeWorkout = generateFinalList(afterDiffWorkout,time);
     
-    return [finalWorkout, typeOfExercise]
+    return [afterTimeWorkout, typeOfExercise]
 }

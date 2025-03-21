@@ -1,4 +1,4 @@
-import { Outlet } from "react-router-dom";
+import { Outlet, useParams } from "react-router-dom";
 import Footer from "./Footer";
 import Header from "./Header";
 import { useEffect, useState } from "react";
@@ -8,12 +8,21 @@ function Home() {
     useEffect(() => {
         window.scrollTo(0,0)
     }, [])
-    
+
     const [bodyPartSelected, setBodyPartSelected] = useState<("brucho" | "ruky" | "nohy" | "zadok" | "kondička")[]>([]);
     const [difficultySelected, setDifficultySelected] = useState<("ľahké" | "stredné" | "ťažké")[]>([]);
     const [equipmentSelected, setEquipmentSelected] = useState<("činky" | "expander" | "kettlebell" | "slider" | "bez pomôcok")[]>([]);
     const [timeSelected, setTimeSelected] = useState(0);
     const [intervalOrRepeatSelected, setIntervalOrRepeatSelected] = useState<"interval" | "opakovania" | null>(null);
+
+    function reset() {
+        setBodyPartSelected([]);
+        setDifficultySelected([]);
+        setEquipmentSelected([]);
+        setTimeSelected(0);
+        setIntervalOrRepeatSelected(null);
+    }
+
 
     function bodyPartSetup(bodyPart: "brucho" | "ruky" | "nohy" | "zadok" | "kondička") {
         if(bodyPartSelected.includes(bodyPart)) {
@@ -61,7 +70,8 @@ function Home() {
         difficultySelected: difficultySelected,
         equipmentSelected: equipmentSelected,
         timeSelected: timeSelected,
-        intervalOrRepeatSelected: intervalOrRepeatSelected
+        intervalOrRepeatSelected: intervalOrRepeatSelected,
+        reset: reset
     }
 
 

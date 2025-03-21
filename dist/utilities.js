@@ -14,7 +14,11 @@ function shuffle(array) {
 }
 exports.shuffle = shuffle;
 function workoutGenerator(listOfWorkouts, { bodyPart, time, difficulty, equipment, typeOfExercise }) {
-    let possibleWorkout = [];
+    let afterTypeWorkout = [];
+    let afterBodyWorkout = [];
+    let afterEquipWorkout = [];
+    let afterDiffWorkout = [];
+    let afterTimeWorkout = [];
     if (!typeOfExercise) {
         const result = intervalOrRepeat();
         if (result <= .5) {
@@ -28,35 +32,75 @@ function workoutGenerator(listOfWorkouts, { bodyPart, time, difficulty, equipmen
         time = Math.random() * 24 + 9;
         time *= 60;
     }
+    else {
+        time *= 60;
+    }
     if (typeOfExercise === "opakovania") {
-        possibleWorkout = listOfWorkouts.filter((exercise) => {
+        afterTypeWorkout = listOfWorkouts.filter((exercise) => {
             return exercise.repeat !== undefined;
         });
     }
     else {
-        possibleWorkout = listOfWorkouts;
+        afterTypeWorkout = listOfWorkouts;
     }
-    function generateFinalList(possibleWorkout, time) {
-        shuffle(possibleWorkout);
-        let actualTime = 0;
-        let finalWorkout = [];
-        while (actualTime < time) {
-            const itemOfList = possibleWorkout[0];
-            if (itemOfList === undefined) {
-                return finalWorkout;
+    if (bodyPart) {
+        for (let exercise of afterTypeWorkout) {
+            for (let part of bodyPart) {
+                if (exercise.bodyPart.includes(part)) {
+                    afterBodyWorkout.push(exercise);
+                }
             }
-            if (!finalWorkout.includes(itemOfList)) {
-                finalWorkout.push(itemOfList);
+        }
+    }
+    if (equipment) {
+        console.log(equipment);
+        for (let exercise of afterBodyWorkout) {
+            if (!exercise.equipment) {
+                afterEquipWorkout.push(exercise);
+            }
+            else if (equipment.includes(exercise.equipment)) {
+                afterEquipWorkout.push(exercise);
+                console.log(exercise);
+            }
+        }
+    }
+    if (difficulty?.includes("ľahké") && !difficulty.includes("ťažké")) {
+        afterDiffWorkout = afterEquipWorkout.filter((exercise) => {
+            return exercise.difficulty !== "ťažké";
+        });
+    }
+    else if (!difficulty?.includes("ľahké") && difficulty?.includes("ťažké")) {
+        afterDiffWorkout = afterEquipWorkout.filter((exercise) => {
+            return exercise.difficulty !== "ľahké";
+        });
+    }
+    else {
+        afterDiffWorkout = afterEquipWorkout;
+    }
+    console.log(afterDiffWorkout.length);
+    function generateFinalList(afterDiffWorkout, time) {
+        shuffle(afterDiffWorkout);
+        let actualTime = 0;
+        while (actualTime < time) {
+            const itemOfList = afterDiffWorkout[0];
+            if (itemOfList === undefined) {
+                return afterTimeWorkout;
+            }
+            if (!afterTimeWorkout.includes(itemOfList)) {
+                afterTimeWorkout.push(itemOfList);
                 actualTime += itemOfList.time;
             }
             else {
-                shuffle(possibleWorkout);
+                shuffle(afterDiffWorkout);
+            }
+            if (actualTime < time && afterDiffWorkout.length === afterTimeWorkout.length) {
+                return afterTimeWorkout;
             }
         }
-        return finalWorkout;
+        return afterTimeWorkout;
     }
     ;
-    const finalWorkout = generateFinalList(possibleWorkout, time);
-    return [finalWorkout, typeOfExercise];
+    afterTimeWorkout = generateFinalList(afterDiffWorkout, time);
+    return [afterTimeWorkout, typeOfExercise];
 }
 exports.workoutGenerator = workoutGenerator;
