@@ -41,13 +41,16 @@ function workoutGenerator(listOfWorkouts, { bodyPart, time, difficulty, equipmen
         let actualTime = 0;
         let finalWorkout = [];
         while (actualTime < time) {
-            const itemOfList = possibleWorkout.shift();
+            const itemOfList = possibleWorkout[0];
             if (itemOfList === undefined) {
                 return finalWorkout;
             }
-            else {
+            if (!finalWorkout.includes(itemOfList)) {
                 finalWorkout.push(itemOfList);
                 actualTime += itemOfList.time;
+            }
+            else {
+                shuffle(possibleWorkout);
             }
         }
         return finalWorkout;

@@ -1,6 +1,3 @@
-/* eslint-disable react-hooks/exhaustive-deps */
-import Header from "./Header";
-import Footer from "./Footer";
 import '../styles/WorkoutPage.css';
 import { Exercise } from "../entities";
 import { useNavigate, useParams } from "react-router-dom";
@@ -26,49 +23,42 @@ function WorkoutPage() {
             const [finalWorkout, intervalVsRepeat] = workoutGenerator(listOfWorkouts,{});
             setFinalWorkout(finalWorkout);
             setIntervalVsRepeat(intervalVsRepeat);
-        }
-    },[params]);
+        } 
+    },[choice]);
 
     function deleteExercise(indexToDelete: number) {
         setFinalWorkout(workouts => workouts.filter((workout, index) => { return index!==indexToDelete}))
     }
 
     function homeRedirect() {
-        navigate(`../${username}`)
+        navigate(`/${username}`)
     }
 
     return (
-    <div className="landing">
-        <main>
-            <Header/>
-            <div className="home">
-                <div className="choiceColumn" id='single' style={{backgroundImage: `url(${background})` }}>
-                    <div className="overlay"></div>
-                    <h2>Tvoj dnešný tréning</h2>
-                    <div className="containerForGenerated" >
-                        {finalWorkout.map((exercise,index) => {
-                            return (
-                                <div key={exercise.id} className={`generatedDetail`}>
-                                    <img alt ={exercise.name} src={exercise.imageURL}/>
-                                    <span className="exerciseName">{exercise.name}</span>
-                                    <span className="exerciseBodyPart">{exercise.bodyPart.length>1? exercise.bodyPart.join(', ') : exercise.bodyPart}</span>
-                                    <span className="exerciseEquipment">{exercise.equipment}</span>
-                                    <span className="exerciseDifficulty">{exercise.difficulty}</span>
-                                    <span className="exerciseInterval">{intervalVsRepeat}</span>
-                                    <span className="exerciseSerie">{exercise.series} série</span>
-                                    {intervalVsRepeat==='interval'? <span className="exerciseInter">{exercise.interval} s</span> : <span className="exerciseRepeat">{exercise.repeat}</span>}
-                                    <button className="deleteExercise" onClick={() => deleteExercise(index)}>X</button>
-                                </div>    
-                            )
-                        })}
-                    </div>
-                    <button id='finish' className="login" onClick={homeRedirect}>Skončiť tréning</button>
+        <div className="home">
+            <div className="choiceColumn" id='single' style={{backgroundImage: `url(${background})` }}>
+                <div className="overlay"></div>
+                <h2>Tvoj dnešný tréning</h2>
+                <div className="containerForGenerated" >
+                    {finalWorkout.map((exercise,index) => {
+                        return (
+                            <div key={exercise.id} className={`generatedDetail`}>
+                                <img alt ={exercise.name} src={exercise.imageURL}/>
+                                <span className="exerciseName">{exercise.name}</span>
+                                <span className="exerciseBodyPart">{exercise.bodyPart.length>1? exercise.bodyPart.join(', ') : exercise.bodyPart}</span>
+                                <span className="exerciseEquipment">{exercise.equipment}</span>
+                                <span className="exerciseDifficulty">{exercise.difficulty}</span>
+                                <span className="exerciseInterval">{intervalVsRepeat}</span>
+                                <span className="exerciseSerie">{exercise.series} série</span>
+                                {intervalVsRepeat==='interval'? <span className="exerciseInter">{exercise.interval} s</span> : <span className="exerciseRepeat">{exercise.repeat}</span>}
+                                <button className="deleteExercise" onClick={() => deleteExercise(index)}>X</button>
+                            </div>    
+                        )
+                    })}
                 </div>
+                <button id='finish' className="login" onClick={homeRedirect}>Skončiť tréning</button>
             </div>
-        </main>
-        <Footer/>
-    </div>
-
+        </div>
     )
 }
 
