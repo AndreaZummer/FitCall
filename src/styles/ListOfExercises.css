@@ -1,0 +1,88 @@
+.exercises-container {
+    padding: 2%;
+    margin: 2%;
+
+}
+
+.display-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    height: fit-content;
+}
+
+.exercise-container {
+    width: 31%;
+    z-index: 2;
+    padding: 2%;
+    margin: 1%;
+    background-color: #ffffffd8;
+    display: flex;
+    flex-direction: column;
+    font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif
+
+}
+
+.exercise-container img {
+    width: 40%;
+    height: auto;
+}
+
+.back {
+    background-size: cover;
+    height: fit-content;
+    position: relative;
+}
+
+.firstrow {
+    display: flex;
+    justify-content: center;
+}
+.popis {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+    width: 45%;
+}
+
+.popis span {
+    font-size: 1.1vw;
+}
+
+.exercise-container h3 {
+    font-size: 2vw;
+    padding: 5% 0;
+}
+
+.exercise-container p {
+    font-size: 1vw;
+    padding-bottom: 11%;
+}
+
+#equip {
+    display: inline-block;
+    padding-top: 10%;
+    border-top: 2px solid #000;
+}
+
+select {
+    display: inline-block;
+}
+
+.exercise-container input[type="submit"] {
+    border-radius: 25px;
+    margin-top: 10%;
+    margin-left: 14%;
+}
+
+.lastrow {
+    display: flex;
+    flex-wrap: wrap;
+    margin-top: auto;
+}
+
+.lastrow label, .lastrow select {
+    display: inline-block;
+    width: 50%;
+}

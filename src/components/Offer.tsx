@@ -13,6 +13,10 @@ function Offer() {
         navigation('./filter');
     }
 
+    function listOfExerciseNavigation() {
+        navigation('./listofexercises/1');
+    }
+
     return (
         <div className="home">
                     <div className="choiceColumn">
@@ -22,7 +26,7 @@ function Offer() {
                             <li>Navoľ si ľubovoľný počet cvičení</li>
                             <li>Pri väčšine cvičení možnosť výberu interval/počet opakovaní</li>
                         </ul>
-                        <button className="login">Pozrieť si cvičenia</button>
+                        <button className="login" onClick={listOfExerciseNavigation}>Pozrieť si cvičenia</button>
                     </div>
                     <div className="choiceColumn">
                         <h2>Vyfiltrujem si tréning</h2>
