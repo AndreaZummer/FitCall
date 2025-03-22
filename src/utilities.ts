@@ -57,7 +57,7 @@ export function workoutGenerator(listOfWorkouts:Exercise[],{bodyPart, time, diff
 
     //  filter out body parts
     
-    if (bodyPart) {
+    if (bodyPart?.length!==0 && bodyPart !== undefined) {
         for (let exercise of afterTypeWorkout) {
             for (let part of bodyPart) {
                 if (exercise.bodyPart.includes(part)) {
@@ -65,33 +65,43 @@ export function workoutGenerator(listOfWorkouts:Exercise[],{bodyPart, time, diff
                 }
             }
         }
+    } else {
+        console.log('00000000000')
+        afterBodyWorkout = afterTypeWorkout
     }
 
+    console.log(afterBodyWorkout.length, 'body')
     // filter out equipment
-
-    if (equipment) {
-        console.log(equipment)
+    
+    if (equipment?.length !== 0 && equipment!== undefined) {
+        console.log('som tu', equipment)
         for (let exercise of afterBodyWorkout) {
             if (!exercise.equipment) {
                 afterEquipWorkout.push(exercise)
             } else if (equipment.includes(exercise.equipment)) {
                 afterEquipWorkout.push(exercise)
-                console.log(exercise)
             }
         }
+    } else {
+        afterEquipWorkout = afterBodyWorkout
     }
+    console.log(afterEquipWorkout.length, 'equip')
 
     // filter out difficulty
-    if (difficulty?.includes("ľahké") && !difficulty.includes("ťažké")) {
-        afterDiffWorkout = afterEquipWorkout.filter((exercise) => {
-            return exercise.difficulty!=="ťažké"
-        })
-    } else if (!difficulty?.includes("ľahké") && difficulty?.includes("ťažké")) {
-        afterDiffWorkout = afterEquipWorkout.filter((exercise) => {
-            return exercise.difficulty!=="ľahké"
-        })
+    if(difficulty!== undefined && difficulty.length!==0) {
+        if (difficulty?.includes("ľahké") && !difficulty.includes("ťažké")) {
+            afterDiffWorkout = afterEquipWorkout.filter((exercise) => {
+                return exercise.difficulty!=="ťažké"
+            })
+        } else if (!difficulty?.includes("ľahké") && difficulty?.includes("ťažké")) {
+            afterDiffWorkout = afterEquipWorkout.filter((exercise) => {
+                return exercise.difficulty!=="ľahké"
+            })
+        } else {
+            afterDiffWorkout = afterEquipWorkout;
+        }
     } else {
-        afterDiffWorkout = afterEquipWorkout;
+        afterDiffWorkout = afterEquipWorkout
     }
     console.log(afterDiffWorkout.length)
 
