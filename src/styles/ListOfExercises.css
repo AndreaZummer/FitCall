@@ -86,3 +86,41 @@ select {
     display: inline-block;
     width: 50%;
 }
+
+.paginationButtons-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+}
+
+.paginationButtons-container button {
+    width: 4%;
+    margin: 2%;
+    z-index: 2;
+    background-color: transparent;
+    border: none;
+    font-weight: 900;
+    font-size: 1vw;
+}
+
+.paginationButtons button {
+    background-color: transparent;
+    border: none;
+    width: 15%;
+    font-size: 1.35vw;
+    font-weight: 300;
+}
+
+.paginationButtons {
+    width: 10%;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    z-index: 2;
+}
+
+.paginationButtons .currentButton {
+    font-size: 1.75vw;
+    font-weight: 600;
+}

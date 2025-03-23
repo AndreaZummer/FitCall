@@ -14,8 +14,25 @@
     flex-direction: column;
 }
 .personal-fit {
-    padding-top: 12rem;
-    height: 23rem;
+    border-top: 10.5rem solid #000;
+    display: flex;
+    align-items: center;
+    background-color: #ffffffd6;
 }
 
+.personal-fit h2 {
+    width: 20%;
+    padding: 2%;
+    text-align: center;
+}
 
+.selectedExercises {
+    overflow-x: scroll;
+    width: 65%;
+}
+
+#createExercise {
+    margin: 0;
+    margin-right: 2%;
+    width: 13%;
+}

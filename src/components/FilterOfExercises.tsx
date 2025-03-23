@@ -76,6 +76,11 @@ function FilterOfExercises() {
             </div>
             <div className="exercise-preview">
                 <div className="personal-fit">
+                    <h2>Moje virtuálne fitko</h2>
+                    <div className="selectedExercises">
+
+                    </div>
+                    <button className="login" id="createExercise">Vytvoriť cvičenie</button>
                 </div>
                 <Outlet/>
             </div>
