@@ -1,7 +1,8 @@
-import { Outlet, useParams } from "react-router-dom";
+import { Outlet } from "react-router-dom";
 import Footer from "./Footer";
 import Header from "./Header";
 import { useEffect, useState } from "react";
+import { Exercise } from "../entities";
 
 function Home() {
 
@@ -13,7 +14,10 @@ function Home() {
     const [difficultySelected, setDifficultySelected] = useState<("ľahké" | "stredné" | "ťažké")[]>([]);
     const [equipmentSelected, setEquipmentSelected] = useState<("činky" | "expander" | "kettlebell" | "slider" | "bez pomôcok")[]>([]);
     const [timeSelected, setTimeSelected] = useState(0);
-    const [intervalOrRepeatSelected, setIntervalOrRepeatSelected] = useState<"interval" | "opakovania" | null>(null);
+    const [intervalOrRepeatSelected, setIntervalOrRepeatSelected] = useState<"interval" | "opakovania" | null | undefined>(null);
+    const [selected, setSelected] = useState<Exercise[]>([]);
+    const [selectedType, setSelectedType] = useState<string[]>([]);
+
 
     function reset() {
         setBodyPartSelected([]);
@@ -21,6 +25,11 @@ function Home() {
         setEquipmentSelected([]);
         setTimeSelected(0);
         setIntervalOrRepeatSelected(null);
+        setSelected([]);
+    }
+
+    function resetSelectedType() {
+        setSelectedType([])
     }
 
 
@@ -56,8 +65,19 @@ function Home() {
     function timeSetup(time: number) {
         setTimeSelected(time)
     }
-    function intervalOrRepeatSetup(intervalOrRepeat: "interval" | "opakovania") {
+    function intervalOrRepeatSetup(intervalOrRepeat: "interval" | "opakovania" | null | undefined) {
         setIntervalOrRepeatSelected(intervalOrRepeat)
+    }
+
+    function addSelected(exercise:Exercise, type: string) {
+        setSelected([...selected, exercise]);
+        setSelectedType([...selectedType, type])
+    }
+
+    function removeHandle(removedexercise:Exercise) {
+        setSelected(selected.filter(exercise => {
+            return removedexercise !== exercise
+        }))
     }
 
     const context = {
@@ -71,7 +91,12 @@ function Home() {
         equipmentSelected: equipmentSelected,
         timeSelected: timeSelected,
         intervalOrRepeatSelected: intervalOrRepeatSelected,
-        reset: reset
+        reset: reset,
+        addSelected: addSelected,
+        selected: selected,
+        removeHandle: removeHandle,
+        selectedType: selectedType,
+        resetSelectedType: resetSelectedType
     }
 
 

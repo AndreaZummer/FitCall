@@ -11,8 +11,11 @@ type workoutPageProperties = {
     timeSelected?: number;
     difficultySelected?: ("ľahké" | "stredné" | "ťažké")[]; 
     equipmentSelected?: ("činky" | "expander" | "kettlebell" | "slider" | "bez pomôcok")[];
-    intervalVsRepeatSelected?: "interval" | "opakovania" | null;
-    reset: () => void
+    intervalOrRepeatSelected?: "interval" | "opakovania" | null | undefined;
+    reset: () => void;
+    selected: Exercise[];
+    selectedType: string[];
+    resetSelectedType: () => void
 }
 
 function WorkoutPage() {
@@ -22,7 +25,7 @@ function WorkoutPage() {
     let time = context.timeSelected;
     let difficulty = context.difficultySelected;
     let equipment = context.equipmentSelected;
-    let typeOfExercise = context.intervalVsRepeatSelected;
+    let typeOfExercise = context.intervalOrRepeatSelected;
     
     const params = useParams();
     const {choice} = params;
@@ -30,6 +33,8 @@ function WorkoutPage() {
     const navigate = useNavigate();
     const [finalWorkout, setFinalWorkout] = useState<Exercise[]> ([]);
     const [intervalVsRepeat, setIntervalVsRepeat] = useState<"interval" | "opakovania" | null> (null);
+    const selectedType = context.selectedType;
+    console.log(selectedType);
 
 
     useEffect(() => {
@@ -49,10 +54,28 @@ function WorkoutPage() {
             setIntervalVsRepeat(intervalVsRepeat);
             setTimeout(() => context.reset(), 1000)
         }
+
+        if (choice === "ownworkout") {
+            const finalWorkout = context.selected;
+            setFinalWorkout(finalWorkout);
+            setTimeout(() => context.reset(), 1000)
+        }
+        return () => context.resetSelectedType()
     },[choice]);
+
 
     function deleteExercise(indexToDelete: number) {
         setFinalWorkout(workouts => workouts.filter((workout, index) => { return index!==indexToDelete}))
+    }
+
+    function typeOfExerciseHandle(index: number) {
+        if (selectedType.length > 0) { 
+            if (selectedType[index] === 'interval') {
+                return <span className="exerciseInter">interval</span>
+            } else {return  <span className="exerciseRepeat">opakovania</span>}
+        } else {
+            return <span className="exerciseInterval">{intervalVsRepeat}</span>
+        }
     }
 
     function homeRedirect() {
@@ -73,7 +96,7 @@ function WorkoutPage() {
                                 <span className="exerciseBodyPart">{exercise.bodyPart.length>1? exercise.bodyPart.join(', ') : exercise.bodyPart}</span>
                                 <span className="exerciseEquipment">{exercise.equipment}</span>
                                 <span className="exerciseDifficulty">{exercise.difficulty}</span>
-                                <span className="exerciseInterval">{intervalVsRepeat}</span>
+                                {typeOfExerciseHandle(index)}
                                 <span className="exerciseSerie">{exercise.series} série</span>
                                 {intervalVsRepeat==='interval'? <span className="exerciseInter">{exercise.interval} s</span> : <span className="exerciseRepeat">{exercise.repeat}</span>}
                                 <button className="deleteExercise" onClick={() => deleteExercise(index)}>X</button>

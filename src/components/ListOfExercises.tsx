@@ -1,13 +1,16 @@
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { listOfWorkouts } from "../data/listOfExercises";
 import "../styles/ListOfExercises.css";
 import background from '../styles/pexels-leonardho-1717096.jpg';
 import { Exercise } from "../entities";
+import { useOutletContext } from "react-router-dom";
 
 function ListOfExercises() {
-
+    const [selectedType, setSelectedType] = useState("interval");
     const [currentPage, setCurrentPage] = useState(1);
     const [currentItems, setCurrentItems] = useState<Exercise[]>([]);
+    const context:{addSelected:(exercise:Exercise, type: string)=> void} = useOutletContext();
+
 
     useEffect(() => {
         function generateItems() {
@@ -53,7 +56,14 @@ function ListOfExercises() {
 
         return currentButtons
     }
+
+    function addExerciseHandle(exercise:Exercise) {
+        context.addSelected(exercise, selectedType);
+    }
     
+    function inputChangeHandle(event:React.ChangeEvent<HTMLSelectElement>) {
+        setSelectedType(event.target.value);
+    }
 
     return (
         <div className="exercises-container">
@@ -74,11 +84,11 @@ function ListOfExercises() {
                                     <p>{exercise.description}</p>
                                     <div className="lastrow">
                                         <label htmlFor={exercise.name}>Vyberte variantu</label>
-                                        <select name={exercise.name} id={exercise.name} disabled={!exercise.repeat}>
-                                            <option value='Intervaly'>Intervaly</option>
-                                            <option value='Opakovania'>Opakovania</option>
+                                        <select name={exercise.name} id={exercise.name} disabled={!exercise.repeat}  onChange={inputChangeHandle}>
+                                            <option value='interval'>Intervaly</option>
+                                            <option value='opakovania'>Opakovania</option>
                                         </select>
-                                            <input className='login' type="submit" value='Pridať cvičenie'/>
+                                            <input className='login' type="submit" value='Pridať cvičenie' onClick={() => addExerciseHandle(exercise)}/>
                                     </div>
                             </div>
                         )

@@ -5,7 +5,7 @@ type generatorProps = {
     time?: number;
     difficulty?: ("ľahké" | "stredné" | "ťažké")[]; 
     equipment?: ("činky" | "expander" | "kettlebell" | "slider" | "bez pomôcok")[];
-    typeOfExercise?: "interval" | "opakovania" | null;
+    typeOfExercise?: "interval" | "opakovania" | null ;
 }
 
 export function intervalOrRepeat() {
@@ -66,11 +66,9 @@ export function workoutGenerator(listOfWorkouts:Exercise[],{bodyPart, time, diff
             }
         }
     } else {
-        console.log('00000000000')
         afterBodyWorkout = afterTypeWorkout
     }
 
-    console.log(afterBodyWorkout.length, 'body')
     // filter out equipment
     
     if (equipment?.length !== 0 && equipment!== undefined) {
@@ -85,7 +83,6 @@ export function workoutGenerator(listOfWorkouts:Exercise[],{bodyPart, time, diff
     } else {
         afterEquipWorkout = afterBodyWorkout
     }
-    console.log(afterEquipWorkout.length, 'equip')
 
     // filter out difficulty
     if(difficulty!== undefined && difficulty.length!==0) {
@@ -103,7 +100,6 @@ export function workoutGenerator(listOfWorkouts:Exercise[],{bodyPart, time, diff
     } else {
         afterDiffWorkout = afterEquipWorkout
     }
-    console.log(afterDiffWorkout.length)
 
     // Generate traning with correct time
     function generateFinalList(afterDiffWorkout: Exercise[],time: number) {

@@ -14,7 +14,7 @@ function Offer() {
     }
 
     function listOfExerciseNavigation() {
-        navigation('./listofexercises/1');
+        navigation('./listofexercises');
     }
 
     return (

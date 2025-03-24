@@ -20,7 +20,7 @@ const router = createBrowserRouter(createRoutesFromElements([
     <Route path=':choice' element={<WorkoutPage/>}/>
     <Route path='filter' element={<FilterExercise/>}/>
     <Route path='listofexercises' element={<FilterOfExercises/>}>
-      <Route path=':page' element={<ListOfExercises/>}/>
+      <Route index element={<ListOfExercises/>}/>
     </Route>
 
   </Route>

@@ -8,7 +8,7 @@ type filterProperties = {
     difficultySetup: (difficulty: "ľahké" | "stredné" | "ťažké") => void,
     equipmentSetup: (equipment: "činky" | "expander" | "kettlebell" | "slider" | "bez pomôcok") => void,
     timeSetup: (time: number) => void,
-    intervalOrRepeatSetup: (intervalOrRepeat: "interval" | "opakovania") => void,
+    intervalOrRepeatSetup: (intervalOrRepeat: "interval" | "opakovania" | null | undefined) => void,
     timeSelected: number,
     intervalOrRepeatSelected: "interval" | "opakovania" | null
 }
@@ -24,6 +24,7 @@ function FilterExercise() {
     const navigate = useNavigate();
 
     function filterWorkout() {
+        console.log()
         navigate('../filteredworkout')
     }
 

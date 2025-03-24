@@ -14,25 +14,75 @@
     flex-direction: column;
 }
 .personal-fit {
-    border-top: 10.5rem solid #000;
     display: flex;
     align-items: center;
+    justify-content: space-between;
     background-color: #ffffffd6;
+    height: 9rem;
+    position: relative;
+    background-position: bottom;
+    background-size: cover;
+    border-radius: 32px;
+    
 }
 
 .personal-fit h2 {
-    width: 20%;
-    padding: 2%;
+    width: 15%;
+    padding: 3.5% 1%;
     text-align: center;
+    z-index: 2;
+    border-radius: 30px;
+    background-color: #ffffffd6;
 }
 
 .selectedExercises {
-    overflow-x: scroll;
+    display: flex;
+    overflow-x: auto;
     width: 65%;
+    z-index: 2;
 }
 
 #createExercise {
-    margin: 0;
-    margin-right: 2%;
+    margin: 0 1%;
     width: 13%;
+    z-index: 2;
+}
+
+.intendation {
+    height: 12rem;
+}
+
+.selected-exercise {
+    width: 20%;
+    flex-shrink: 0;
+    display: flex;
+    background-color: #ffffffd8;
+    margin: 2%;
+}
+
+.selected-exercise img {
+    width: 47%;
+    height: auto;
+}
+
+.half {
+    display: flex;
+    flex-direction: column;
+    width: 53%;
+}
+
+.half button {
+    width: 20%;
+    align-self: flex-end;
+    background-color: transparent;
+    border: none;
+}
+
+.half button:hover {
+    background-color: #8d8c8c;
+}
+
+.selected-exercise h4 {
+    text-align: center;
+    padding-top: 5%;
 }

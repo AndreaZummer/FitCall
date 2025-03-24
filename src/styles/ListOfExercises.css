@@ -32,6 +32,7 @@
     background-size: cover;
     height: fit-content;
     position: relative;
+    border-radius: 25px;
 }
 
 .firstrow {

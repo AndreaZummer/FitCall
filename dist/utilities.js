@@ -53,10 +53,8 @@ function workoutGenerator(listOfWorkouts, { bodyPart, time, difficulty, equipmen
         }
     }
     else {
-        console.log('00000000000');
         afterBodyWorkout = afterTypeWorkout;
     }
-    console.log(afterBodyWorkout.length, 'body');
     if (equipment?.length !== 0 && equipment !== undefined) {
         console.log('som tu', equipment);
         for (let exercise of afterBodyWorkout) {
@@ -71,7 +69,6 @@ function workoutGenerator(listOfWorkouts, { bodyPart, time, difficulty, equipmen
     else {
         afterEquipWorkout = afterBodyWorkout;
     }
-    console.log(afterEquipWorkout.length, 'equip');
     if (difficulty !== undefined && difficulty.length !== 0) {
         if (difficulty?.includes("ľahké") && !difficulty.includes("ťažké")) {
             afterDiffWorkout = afterEquipWorkout.filter((exercise) => {
@@ -90,7 +87,6 @@ function workoutGenerator(listOfWorkouts, { bodyPart, time, difficulty, equipmen
     else {
         afterDiffWorkout = afterEquipWorkout;
     }
-    console.log(afterDiffWorkout.length);
     function generateFinalList(afterDiffWorkout, time) {
         shuffle(afterDiffWorkout);
         let actualTime = 0;
