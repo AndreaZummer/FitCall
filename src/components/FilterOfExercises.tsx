@@ -12,6 +12,7 @@ function FilterOfExercises() {
     
     useEffect(() => {
         context.resetSelectedType()
+        // eslint-disable-next-line
     }, [])
 
     function generateHandle() {
