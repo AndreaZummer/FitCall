@@ -64,3 +64,34 @@
     justify-content: center;
     align-items: center;
 }
+
+/* media queries */
+
+@media only screen and (max-width:770px) {
+    .crunch {
+        padding-top: 22%;
+    }
+}
+
+@media only screen and (max-width:525px) {
+    .text p {
+        font-size: 2.25vw;
+    }
+
+    #registrationButton {
+        width: 65%;
+        font-size: 2vw;
+        padding: 4%;
+    }
+}
+
+@media only screen and (max-width:375px) {
+    .crunch {
+        padding-top: 33%;
+    }
+
+    .slides h2 {
+        font-size: 3.5vw;
+    }
+}
+

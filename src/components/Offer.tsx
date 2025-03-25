@@ -26,7 +26,7 @@ function Offer() {
                             <li>Navoľ si ľubovoľný počet cvičení</li>
                             <li>Pri väčšine cvičení možnosť výberu interval/počet opakovaní</li>
                         </ul>
-                        <button className="login" onClick={listOfExerciseNavigation}>Pozrieť si cvičenia</button>
+                        <button className="login login-query" onClick={listOfExerciseNavigation}>Pozrieť si cvičenia</button>
                     </div>
                     <div className="choiceColumn">
                         <h2>Vyfiltrujem si tréning</h2>
@@ -36,7 +36,7 @@ function Offer() {
                             <li>Povedz nám ako dlho chceš cvičiť</li>
                             <li>Nemáš všetky potrebné cvičebné pomôcky?...Nevadí! Vyber si tie ktoré máš</li>
                         </ul>
-                        <button className="login" onClick={filterWorkout}>Navoliť typ tréningu</button>
+                        <button className="login login-query" onClick={filterWorkout}>Navoliť typ tréningu</button>
                     </div>
                     <div className="choiceColumn">
                         <h2>Nechám sa prekvapiť</h2>
@@ -44,7 +44,7 @@ function Offer() {
                             <li>Stále nový tréning, pri ktorom nikdy nevieš čo ťa čaká</li>
                             <li>Nepáči sa ti niektorý cvik? Tak ho vymeň!</li>
                         </ul>
-                        <button className="login" onClick={generateWorkoutSurprise}>Vytvoriť tréning</button>
+                        <button className="login login-query" onClick={generateWorkoutSurprise}>Vytvoriť tréning</button>
                     </div>
                 </div>
     )

@@ -146,3 +146,107 @@
 .landing {
     height: 100%;
 }
+
+/* media queries */
+
+@media only screen and (max-width:770px) {
+
+    #logo {
+        width: 20%;
+    }
+
+    .sign {
+        width: 17%;
+    }
+
+    .login {
+        font-size: 1.7vw;
+    }
+
+    .sign p {
+        font-size: 1.35vw;
+    }
+
+    .signUp {
+        font-size: 1.55vw;
+    }
+
+    .profil img {
+        width: 17%;
+    }
+
+    .profil h3 {
+        font-size: 2.2vw;
+    }
+}
+
+@media only screen and (max-width:550px) {
+    .sign {
+        width: 20%;
+    }
+
+}
+
+@media only screen and (max-width:425px) {
+    #logo {
+        width: 22%;
+        padding-left: 1.5%;
+    }
+
+    .sign {
+        justify-content: center;
+        align-items: center;
+        width: 30%;
+    }
+
+    .login {
+        font-size: 2.25vw;
+        letter-spacing: .12rem;
+    }
+
+    .sign p {
+        display: none;
+    }
+
+    .signUp {
+        font-size: 2.25vw;
+        margin: 0;
+        padding: 10% 4%;
+    }
+
+    .login {
+        margin: 3% 3% 3% 5%
+    }
+
+    .header-svgs {
+        width: 5.25%;
+    }
+
+    #stop {
+        translate: 480% 70%;
+    }
+    
+    #bag {
+        translate: 650% 220%;
+    }
+    
+    #watch {
+        translate: 840% 70%;
+    }
+    
+    #dumbell {
+        translate: 1000% 220%;
+    }
+    
+    #shoe {
+        translate: 1200% 100%;
+    }
+
+    .profil {
+        width: 25%;
+    }
+
+    .profil .signUp {
+        width: 80%;
+    }
+}

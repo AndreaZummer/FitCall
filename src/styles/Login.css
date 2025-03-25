@@ -1,8 +1,9 @@
 
 .loginField {
-    translate: 150% 45%;
     width: 25%;
     height: 60vh;
+    top: 30%;
+    left: 37%;
     background-color: #ffffffd4;
     border: 3px solid #000000a0;
     border-radius: 25px;
@@ -86,4 +87,45 @@
 .loginForm span:hover {
     cursor: pointer;
     font-weight: 700;
+}
+
+@media only screen and (max-width:900px) {
+    .loginField {
+        width: 35%;
+    }
+}
+
+@media only screen and (max-width:770px) {
+    .loginField {
+        width: 45%;
+        height: 65vw;
+        left: 32%;
+    }
+}
+
+@media only screen and (max-width:590px) {
+    .loginField {
+        width: 52%;
+        height: 62vw;
+        left: 25%;
+    }
+}
+
+@media only screen and (max-width:500px) {
+    .loginField {
+        width: 70%;
+        height: 80vw;
+        left: 15%;
+        top: 20%
+    }
+    .loginForm input[type='submit'] {
+        width: 70%;
+    }
+}
+
+@media only screen and (max-width:425px) {
+    .loginField {
+        width: 70%;
+        height: 90vw;
+    }
 }

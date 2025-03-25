@@ -72,7 +72,6 @@ export function workoutGenerator(listOfWorkouts:Exercise[],{bodyPart, time, diff
     // filter out equipment
     
     if (equipment?.length !== 0 && equipment!== undefined) {
-        console.log('som tu', equipment)
         for (let exercise of afterBodyWorkout) {
             if (!exercise.equipment) {
                 afterEquipWorkout.push(exercise)

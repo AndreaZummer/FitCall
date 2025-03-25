@@ -44,6 +44,20 @@
     padding: 1%;
 }
 
+.container-query {
+    width: 88%;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+}
+
+.container-query-detail {
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    width: 60%;
+}
+
 .deleteExercise {
     margin: 0 1% 0 0;
     width: 4%;
@@ -63,15 +77,15 @@
 }
 
 .exerciseBodyPart {
-    width: 10%;
+    width: 30%;
 }
 
 .exerciseEquipment {
-    width: 10%;
+    width: 20%;
 }
 
 .exerciseDifficulty {
-    width: 10%;
+    width: 20%;
 }
 
 .exerciseSerie {
@@ -88,4 +102,111 @@
 
 #finish {
     z-index: 2;
+}
+
+@media only screen and (max-width:1024px) {
+    #single {
+        width: 100%;
+    }
+
+    #single h2 {
+        font-size: 3vw;
+    }
+
+    .generatedDetail {
+        font-size: 1.5vw;
+    }
+
+    .generatedDetail .exerciseName {
+        font-size: 1.7vw;
+    }
+
+    #finish {
+        font-size: 1.6vw;
+    }
+}
+
+@media only screen and (max-width:700px) {
+    .deleteExercise {
+        margin: 0;
+    }
+}
+
+@media only screen and (max-width:620px) {
+    .generatedDetail {
+        font-size: 1.7vw
+    }
+
+    .containerForGenerated {
+        width: 90%;
+    }
+}
+
+@media only screen and (max-width:550px) {
+    .overlay {
+        border-radius: 20px;
+    }
+    .home {
+        width: 90%;
+    }
+    .generatedDetail img {
+        width: 22%;
+        padding: 3% 1% 2% 3%;
+    }
+
+    .container-query {
+        font-size: 2vw;
+        
+    }
+
+    .container-query .exerciseName {
+        font-size: 2.3vw;
+    }
+
+    .container-query-detail {
+        width: 35%;
+        flex-direction: column;
+    }
+
+    .exerciseBodyPart {
+        width: 100%;
+    }
+    
+    .exerciseEquipment {
+        width: 100%;
+        padding: 3% 0;
+    }
+    
+    .exerciseDifficulty {
+        width: 100%;
+        padding-bottom: 3%;
+    }
+
+    .deleteExercise {
+        padding: 2% 5% 2% 2.5%;
+    }
+
+    #finish {
+        font-size: 2vw;
+        letter-spacing: .2vw;
+    }
+}
+
+@media only screen and (max-width:425px) {
+    .container-query{
+        font-size: 2.3vw;
+    }
+
+    #single h2 {
+        font-size: 3.5vw;
+    }
+
+    .deleteExercise {
+        padding: 1.2% 5% 1.2% 1.5%;
+        font-size: 3.2vw;
+    }
+
+    #finish {
+        font-size: 2.5vw;
+    }
 }

@@ -72,7 +72,7 @@ function ListOfExercises() {
                 <div className="display-container">
                     {currentItems.map((exercise, index) => {
                         return (
-                            <div className="exercise-container">
+                            <div className="exercise-container" key={exercise.name}>
                                 <div className="firstrow">
                                     <img alt={exercise.name} src={exercise.imageURL}/>
                                     <div className="popis">

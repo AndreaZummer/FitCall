@@ -22,7 +22,7 @@ function Login() {
         
         <div className="container">
             <div className="loginField">
-            <button onClick={loginClose}>X</button>
+                <button onClick={loginClose}>X</button>
                 <form className="loginForm" onSubmit={handleLoginSubmit}>
                     <input type="text" name='userName' id='userName' placeholder="Zadajte užívateľské meno" required autoFocus={true} onChange={handleUserNameInput} value={userName}/>
                     <input type="password" name='password' required placeholder="Heslo" id='password'/>

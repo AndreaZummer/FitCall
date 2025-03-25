@@ -9,7 +9,7 @@
 
 .exercise-preview {
     width: 76%;
-    margin-left: 4%;
+    margin: 0 auto;
     display: flex;
     flex-direction: column;
 }
@@ -18,7 +18,7 @@
     align-items: center;
     justify-content: space-between;
     background-color: #ffffffd6;
-    height: 9rem;
+    height: fit-content;
     position: relative;
     background-position: bottom;
     background-size: cover;
@@ -29,10 +29,12 @@
 .personal-fit h2 {
     width: 15%;
     padding: 3.5% 1%;
+    font-size: 1.5vw;
     text-align: center;
     z-index: 2;
     border-radius: 30px;
     background-color: #ffffffd6;
+    height: 100%;
 }
 
 .selectedExercises {
@@ -53,7 +55,7 @@
 }
 
 .selected-exercise {
-    width: 20%;
+    width: 25%;
     flex-shrink: 0;
     display: flex;
     background-color: #ffffffd8;
@@ -81,8 +83,108 @@
 .half button:hover {
     background-color: #8d8c8c;
 }
+.remove {
+    padding: 4% 0;
+}
 
 .selected-exercise h4 {
     text-align: center;
-    padding-top: 5%;
+    font-size: 1vw;
+}
+
+@media only screen and (min-width:1700px) {
+    .intendation {
+        height: 16rem;
+    }
+
+    .personal-fit {
+        height: 11rem;
+    }
+
+    .personal-fit h2 {
+        font-size: 1.1vw;
+    }
+}
+
+@media only screen and (max-width:1250px) {
+    .intendation {
+        height: 9rem;
+    }
+}
+
+@media only screen and (max-width:950px) {
+    .personal-fit {
+        height: 6rem;
+    }
+    .personal-fit img {
+        width: 47%;
+    }
+    .selected-exercise {
+        width: 30%;
+    }
+    .selected-exercise h4 {
+        font-size: 1.2vw;
+    }
+}
+@media only screen and (max-width:800px) {
+    .exercise-preview {
+        width: 90%;
+    }
+
+    .personal-fit h2{
+        font-size: 2vw;
+    }
+
+    #createExercise {
+        font-size: 1.5vw;
+        width: 16%;
+    }
+}
+
+@media only screen and (max-width:580px) {
+    .intendation {
+        height: 6.5rem;
+    }
+    .personal-fit h2 {
+        padding: 4.5% 1%;
+    }
+    .selected-exercise {
+        width: 30%;
+    }
+}
+
+@media only screen and (max-width:520px) {
+    .personal-fit h2 {
+        display: none;
+    }
+    .personal-fit {
+        flex-direction: column;
+    }
+
+    #createExercise {
+        width: 35%;
+        padding: 0 5%;
+        margin: 1% 0;
+        height: 20%;
+        letter-spacing: .3vw;
+    }
+
+    .selectedExercises {
+        width: 90%;
+    }
+    .selected-exercise {
+        width: 37%;
+    }
+    .selected-exercise h4 {
+        font-size: 2vw;
+    }
+}
+
+@media only screen and (max-width:375px) {
+    #createExercise {
+        font-size: 2vw;
+    }
+    .selectedExercises {
+        margin-top: 2%;
+    }
 }

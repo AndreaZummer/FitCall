@@ -1,5 +1,7 @@
 #filter {
     width: 70%;
+    max-width: 85rem;
+    max-height: 123rem;
     background-position: center;
     position: relative;
 }
@@ -15,10 +17,12 @@
 #filterOut {
     z-index: 2;
     margin: 2% 0;
+    max-height: 4.5rem;
 }
 
 .menu {
     width: 70%;
+    max-height: 102.5rem;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -56,7 +60,7 @@
 .button {
     margin: 2% 2% 2% 10%;
     padding: 5%;
-    width: 55%;
+    width: 60%;
     border: 1px solid #ffee33;
     font-weight: 600;
     background-color: #dad8d8;
@@ -75,3 +79,70 @@
     height: auto;
 }
 
+@media only screen and (max-width:1110px) {
+    .button {
+        width: 70%;
+    }
+
+    #filterOut {
+        font-size: 1.7vw;
+    }
+}
+
+@media only screen and (max-width:1110px) {
+    .selection h3 {
+        font-size: 1.7vw;
+        width: 60%;
+    }
+
+    .button {
+        font-size: 1.2vw;
+    }
+}
+
+@media only screen and (max-width:770px) {
+    #filter {
+        width: 80%;
+    }
+}
+
+@media only screen and (max-width:600px) {
+    #filter {
+        width: 90%;
+    }
+
+    .menu {
+        width: 80%;
+    }
+    .selection {
+        width: 85%;
+    }
+
+    .selection h3 {
+        font-size: 2.5vw;
+        width: 60%;
+    }
+
+    .button {
+        font-size: 2vw;
+    }
+
+    #filterOut {
+        font-size: 2vw;
+    }
+}
+
+@media only screen and (max-width:600px) {
+    .selection h3 {
+        font-size: 3vw;
+        width: 40%;
+    }
+    .button {
+        font-size: 2.5vw;
+    }
+
+    #filterOut {
+        letter-spacing: .1vw;
+        font-size: 2.6vw;
+    }
+}

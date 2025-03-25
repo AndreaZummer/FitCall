@@ -47,3 +47,88 @@
     content: '\2714';
     padding-right: 5%;
 }
+
+@media only screen and (max-width:800px) {
+    .home {
+        width: 94%;
+        padding-top: 18%;
+        padding-bottom: 5%;
+    }
+    .choiceColumn {
+        width: 32%;
+    }
+    .choiceColumn h2 {
+        font-size: 2.5vw;
+        padding: 7%;
+    }
+
+    .choiceColumn li {
+        font-size: 1.4vw;   
+    }
+
+    .choiceColumn .login-query {
+        font-size: 1.5vw;
+        width: 65%;
+        
+    }
+
+}
+
+@media only screen and (max-width:660px) {
+    .choiceColumn li {
+        font-size: 2vw;   
+    }
+
+    .choiceColumn .login-query {
+        font-size: 1.8vw;
+        width: 75%;
+        padding: 5% 0;
+        
+    }
+}
+
+@media only screen and (max-width:550px) {
+    .home {
+        width: 70%;
+        padding-top: 18%;
+        flex-direction: column;
+    }
+    
+    .choiceColumn {
+        width: 70%;
+        margin-bottom: 3%;
+    }
+
+    .choiceColumn h2 {
+        font-size: 3vw;
+    }
+
+    .choiceColumn li {
+        font-size: 2vw;   
+    }
+
+    .choiceColumn .login-query {
+        font-size: 2vw;
+        width: 55%;
+        
+    }
+}
+
+@media only screen and (max-width:425px) {
+    .home {
+        padding-top: 25%;
+    }
+    .choiceColumn {
+        width: 90%;
+    }
+    .choiceColumn h2 {
+        font-size: 5vw;
+    }
+    .choiceColumn li {
+        font-size: 3.3vw;   
+    }
+    .choiceColumn .login-query {
+        font-size: 2.7vw;
+        letter-spacing: .2vw;
+    }
+}

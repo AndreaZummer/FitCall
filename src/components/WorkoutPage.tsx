@@ -34,7 +34,6 @@ function WorkoutPage() {
     const [finalWorkout, setFinalWorkout] = useState<Exercise[]> ([]);
     const [intervalVsRepeat, setIntervalVsRepeat] = useState<"interval" | "opakovania" | null> (null);
     const selectedType = context.selectedType;
-    console.log(selectedType);
 
 
     useEffect(() => {
@@ -55,6 +54,7 @@ function WorkoutPage() {
             setTimeout(() => context.reset(), 1000)
         }
 
+        // Choosen workout 
         if (choice === "ownworkout") {
             const finalWorkout = context.selected;
             setFinalWorkout(finalWorkout);
@@ -90,16 +90,20 @@ function WorkoutPage() {
                 <div className="containerForGenerated" >
                     {finalWorkout.map((exercise,index) => {
                         return (
-                            <div key={exercise.id} className={`generatedDetail`}>
+                            <div key={index} className={`generatedDetail`}>
                                 <img alt ={exercise.name} src={exercise.imageURL}/>
-                                <span className="exerciseName">{exercise.name}</span>
-                                <span className="exerciseBodyPart">{exercise.bodyPart.length>1? exercise.bodyPart.join(', ') : exercise.bodyPart}</span>
-                                <span className="exerciseEquipment">{exercise.equipment}</span>
-                                <span className="exerciseDifficulty">{exercise.difficulty}</span>
-                                {typeOfExerciseHandle(index)}
-                                <span className="exerciseSerie">{exercise.series} série</span>
-                                {intervalVsRepeat==='interval'? <span className="exerciseInter">{exercise.interval} s</span> : <span className="exerciseRepeat">{exercise.repeat}</span>}
-                                <button className="deleteExercise" onClick={() => deleteExercise(index)}>X</button>
+                                <div className='container-query'>
+                                    <span className="exerciseName">{exercise.name}</span>
+                                    <div className='container-query-detail'>
+                                        <span className="exerciseBodyPart">{exercise.bodyPart.length>1? exercise.bodyPart.join(', ') : exercise.bodyPart}</span>
+                                        <span className="exerciseEquipment">{exercise.equipment}</span>
+                                        <span className="exerciseDifficulty">{exercise.difficulty}</span>
+                                    </div>
+                                    {typeOfExerciseHandle(index)}
+                                    <span className="exerciseSerie">{exercise.series} série</span>
+                                    {intervalVsRepeat==='interval'? <span className="exerciseInter">{exercise.interval} s</span> : <span className="exerciseRepeat">{exercise.repeat}</span>}
+                                    <button className="deleteExercise" onClick={() => deleteExercise(index)}>X</button>
+                                </div>
                             </div>    
                         )
                     })}

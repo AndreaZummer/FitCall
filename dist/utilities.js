@@ -56,7 +56,6 @@ function workoutGenerator(listOfWorkouts, { bodyPart, time, difficulty, equipmen
         afterBodyWorkout = afterTypeWorkout;
     }
     if (equipment?.length !== 0 && equipment !== undefined) {
-        console.log('som tu', equipment);
         for (let exercise of afterBodyWorkout) {
             if (!exercise.equipment) {
                 afterEquipWorkout.push(exercise);

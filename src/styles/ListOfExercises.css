@@ -17,6 +17,7 @@
     padding: 2%;
     margin: 1%;
     background-color: #ffffffd8;
+    border-radius: 25px;
     display: flex;
     flex-direction: column;
     font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif
@@ -124,4 +125,71 @@ select {
 .paginationButtons .currentButton {
     font-size: 1.75vw;
     font-weight: 600;
+}
+
+/* media queries */
+
+@media only screen and (min-width:1700px) {
+    .lastrow select, .lastrow label {
+        font-size: 1vw;
+    }
+}
+
+@media only screen and (max-width:1350px) {
+    .lastrow select, .lastrow label {
+        font-size: 1vw;
+    }
+}
+
+@media only screen and (max-width:800px) {
+    .lastrow select, .lastrow label, .exercise-container p, .popis span {
+        font-size: 1.3vw;
+    }
+    .exercise-container input[type="submit"] {
+        font-size: 1.2vw;
+    }
+    .paginationButtons .currentButton {
+        font-size: 2.2vw;
+    }
+
+    .paginationButtons button {
+        font-size: 2vw;
+    }
+}
+
+@media only screen and (max-width:630px) {
+    .exercise-container {
+        width: 40%;
+    }
+    .display-container {
+        justify-content: space-evenly;
+    }
+    .lastrow select, .lastrow label, .exercise-container p, .popis span {
+        font-size: 1.9vw;
+    }
+    .exercise-container input[type="submit"] {
+        font-size: 1.7vw;
+    }
+    .paginationButtons-container button {
+        font-size: 2vw;
+    }
+}
+
+@media only screen and (max-width:400px) {
+    .exercise-container {
+        width: 60%;
+    }
+    .lastrow select, .lastrow label, .exercise-container p, .popis span {
+        font-size: 2.4vw;
+    }
+    .exercise-container input[type="submit"] {
+        font-size: 2vw;
+    }
+    .paginationButtons .currentButton {
+        font-size: 3vw;
+    }
+
+    .paginationButtons button {
+        font-size: 3vw;
+    }
 }
