@@ -42,26 +42,28 @@ function WorkoutPage() {
         // Surprise workout
         if (choice === "surpriseworkout") {
             const [finalWorkout, intervalVsRepeat] = workoutGenerator(listOfWorkouts,{});
-            setFinalWorkout(finalWorkout);
-            setIntervalVsRepeat(intervalVsRepeat);
+            setFinalWorkout(() => finalWorkout);
+            setIntervalVsRepeat(() => intervalVsRepeat);
         } 
 
         // Filtered workout
         if (choice === "filteredworkout") {
             const [finalWorkout, intervalVsRepeat] = workoutGenerator(listOfWorkouts,{bodyPart, time, difficulty, equipment, typeOfExercise});
-            setFinalWorkout(finalWorkout);
-            setIntervalVsRepeat(intervalVsRepeat);
+            setFinalWorkout(() => finalWorkout);
+            setIntervalVsRepeat(() =>intervalVsRepeat);
             setTimeout(() => context.reset(), 1000)
         }
 
         // Choosen workout 
         if (choice === "ownworkout") {
             const finalWorkout = context.selected;
-            setFinalWorkout(finalWorkout);
+            setFinalWorkout(() => finalWorkout);
             setTimeout(() => context.reset(), 1000)
         }
+    
         return () => context.resetSelectedType()
-    },[choice]);
+        // eslint-disable-next-line
+    }, [choice]);
 
 
     function deleteExercise(indexToDelete: number) {

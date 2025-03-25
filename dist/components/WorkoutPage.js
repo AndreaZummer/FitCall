@@ -28,18 +28,18 @@ function WorkoutPage() {
         window.scrollTo(0, 0);
         if (choice === "surpriseworkout") {
             const [finalWorkout, intervalVsRepeat] = (0, utilities_1.workoutGenerator)(listOfExercises_1.listOfWorkouts, {});
-            setFinalWorkout(finalWorkout);
-            setIntervalVsRepeat(intervalVsRepeat);
+            setFinalWorkout(() => finalWorkout);
+            setIntervalVsRepeat(() => intervalVsRepeat);
         }
         if (choice === "filteredworkout") {
             const [finalWorkout, intervalVsRepeat] = (0, utilities_1.workoutGenerator)(listOfExercises_1.listOfWorkouts, { bodyPart, time, difficulty, equipment, typeOfExercise });
-            setFinalWorkout(finalWorkout);
-            setIntervalVsRepeat(intervalVsRepeat);
+            setFinalWorkout(() => finalWorkout);
+            setIntervalVsRepeat(() => intervalVsRepeat);
             setTimeout(() => context.reset(), 1000);
         }
         if (choice === "ownworkout") {
             const finalWorkout = context.selected;
-            setFinalWorkout(finalWorkout);
+            setFinalWorkout(() => finalWorkout);
             setTimeout(() => context.reset(), 1000);
         }
         return () => context.resetSelectedType();
