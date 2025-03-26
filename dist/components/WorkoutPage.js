@@ -50,10 +50,10 @@ function WorkoutPage() {
     function typeOfExerciseHandle(index) {
         if (selectedType.length > 0) {
             if (selectedType[index] === 'interval') {
-                return (0, jsx_runtime_1.jsx)("span", { className: "exerciseInter", children: "interval" });
+                return (0, jsx_runtime_1.jsx)("span", { className: "exerciseInter" });
             }
             else {
-                return (0, jsx_runtime_1.jsx)("span", { className: "exerciseRepeat", children: "interval" });
+                return (0, jsx_runtime_1.jsx)("span", { className: "exerciseRepeat" });
             }
         }
         else {

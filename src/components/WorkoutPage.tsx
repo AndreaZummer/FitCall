@@ -73,8 +73,8 @@ function WorkoutPage() {
     function typeOfExerciseHandle(index: number) {
         if (selectedType.length > 0) { 
             if (selectedType[index] === 'interval') {
-                return <span className="exerciseInter">interval</span>
-            } else {return  <span className="exerciseRepeat">interval</span>}   /*/* */
+                return <span className="exerciseInter"></span>
+            } else {return  <span className="exerciseRepeat"></span>}   
         } else {
             return <span className="exerciseInterval">{intervalVsRepeat}</span>
         }
