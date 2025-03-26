@@ -60,8 +60,6 @@ function WorkoutPage() {
             setFinalWorkout(() => finalWorkout);
             setTimeout(() => context.reset(), 1000)
         }
-    
-        return () => context.resetSelectedType()
         // eslint-disable-next-line
     }, [choice]);
 
@@ -71,17 +69,27 @@ function WorkoutPage() {
     }
 
     function typeOfExerciseHandle(index: number) {
+        
         if (selectedType.length > 0) { 
             if (selectedType[index] === 'interval') {
-                return <span className="exerciseInter"></span>
-            } else {return  <span className="exerciseRepeat"></span>}   
+                return <span className="exerciseInter">interval</span>
+            } else {return  <span className="exerciseRepeat">opakovania</span>}   
         } else {
             return <span className="exerciseInterval">{intervalVsRepeat}</span>
         }
     }
 
+    function displayIntervalOrRepeatTime(index:number,exercise:Exercise) {
+        if(intervalVsRepeat==='interval' || selectedType[index]==='interval') {
+            return <span className="exerciseInter">{exercise.interval} s</span> 
+        } else {
+            return <span className="exerciseRepeat">{exercise.repeat}</span>
+        } 
+    }
+
     function homeRedirect() {
         navigate(`/${username}`)
+        context.resetSelectedType();
     }
 
     return (
@@ -103,7 +111,7 @@ function WorkoutPage() {
                                     </div>
                                     {typeOfExerciseHandle(index)}
                                     <span className="exerciseSerie">{exercise.series} série</span>
-                                    {intervalVsRepeat==='interval'? <span className="exerciseInter">{exercise.interval} s</span> : <span className="exerciseRepeat">{exercise.repeat}</span>}
+                                    {displayIntervalOrRepeatTime(index,exercise)}
                                     <button className="deleteExercise" onClick={() => deleteExercise(index)}>X</button>
                                 </div>
                             </div>    

@@ -59,6 +59,7 @@ function ListOfExercises() {
 
     function addExerciseHandle(exercise:Exercise) {
         context.addSelected(exercise, selectedType);
+        setSelectedType("interval")
     }
     
     function inputChangeHandle(event:React.ChangeEvent<HTMLSelectElement>) {
@@ -84,7 +85,7 @@ function ListOfExercises() {
                                     <p>{exercise.description}</p>
                                     <div className="lastrow">
                                         <label htmlFor={exercise.name}>Vyberte variantu</label>
-                                        <select name={exercise.name} id={exercise.name} disabled={!exercise.repeat}  onChange={inputChangeHandle}>
+                                        <select name={exercise.name} id={exercise.name} disabled={!exercise.repeat}  onChange={inputChangeHandle} defaultValue={"interval"}>
                                             <option value='interval'>Intervaly</option>
                                             <option value='opakovania'>Opakovania</option>
                                         </select>
