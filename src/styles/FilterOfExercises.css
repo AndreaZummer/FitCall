@@ -19,11 +19,10 @@
     justify-content: space-between;
     background-color: #ffffffd6;
     height: fit-content;
-    position: relative;
+    position: sticky;
     background-position: bottom;
     background-size: cover;
-    border-radius: 32px;
-    
+    border-radius: 32px; 
 }
 
 .personal-fit h2 {

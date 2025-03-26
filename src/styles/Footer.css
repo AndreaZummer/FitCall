@@ -47,6 +47,10 @@ footer {
     footer {
         font-size: 1.3vw;
     }
+
+    #mail {
+        margin-right: 2%;
+    }
 }
 
 @media only screen and (max-width:600px) {
