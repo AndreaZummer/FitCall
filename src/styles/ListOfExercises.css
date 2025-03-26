@@ -31,6 +31,7 @@
 
 .back {
     background-size: cover;
+    background-position: center;
     height: fit-content;
     position: relative;
     border-radius: 25px;

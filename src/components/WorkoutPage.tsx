@@ -74,7 +74,7 @@ function WorkoutPage() {
         if (selectedType.length > 0) { 
             if (selectedType[index] === 'interval') {
                 return <span className="exerciseInter">interval</span>
-            } else {return  <span className="exerciseRepeat">opakovania</span>}
+            } else {return  <span className="exerciseRepeat">interval</span>}   /*/* */
         } else {
             return <span className="exerciseInterval">{intervalVsRepeat}</span>
         }

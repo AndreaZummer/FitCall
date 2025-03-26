@@ -53,7 +53,7 @@ function WorkoutPage() {
                 return (0, jsx_runtime_1.jsx)("span", { className: "exerciseInter", children: "interval" });
             }
             else {
-                return (0, jsx_runtime_1.jsx)("span", { className: "exerciseRepeat", children: "opakovania" });
+                return (0, jsx_runtime_1.jsx)("span", { className: "exerciseRepeat", children: "interval" });
             }
         }
         else {
