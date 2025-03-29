@@ -48,11 +48,15 @@ After the user logs in, the home page is displayed. It allows the user to choose
 
 3. **List of Exercises**
 
-After choosing the first option, a list of exercises is displayed. At the top of the page is a section for the chosen exercises, and below it is a section displaying all available exercises, with twelve items per page. Each exercise includes a picture, a short description, the difficulty level, the targeted body part, and the required equipment. Most exercises also offer the option to choose between interval training or the number of repetitions. Once all exercises are selected, the workout can be displayed on the screen.
+After choosing the first option, a list of exercises is displayed. At the top of the page is a section for the chosen exercises, and below it is a section displaying all available exercises, with twelve items per page. Each exercise includes a picture, a short description, the difficulty level, the targeted body part, and the required equipment. Most exercises also offer the option to choose between interval training or the number of repetitions. For more information user can click a name of exercise and see more details with longer description how to do exercise correctly. Once all exercises are selected, the workout can be displayed on the screen.
 
 ![FitCall list of exercises](https://github.com/AndreaZummer/FitCall/blob/585f43135dcbb4b914c9b5a38feae2e17de0424f/src/data/resources/readme/FitCall-list.png)
 
 ![FitCall list of exercises](https://github.com/AndreaZummer/FitCall/blob/585f43135dcbb4b914c9b5a38feae2e17de0424f/src/data/resources/readme/FitCall-list2.png)
+
+![FitCall exercise detail](https://github.com/AndreaZummer/FitCall/blob/46d8c90f621ae1e1a585a0d3ce88c55289049fdf/src/data/resources/readme/ExerciseDetail.png)
+
+
 
 4. **Filter**
 
@@ -70,7 +74,7 @@ The third option is to select a surprise workout. This workout can include any e
 
 ## Future
 
-In the future, many features can be added to this project. The first feature to add is the ability to view detailed descriptions for each exercise, including instructions on how to perform them correctly. Another addition would be a timer for every workout, with the current exercise being highlighted.
+In the future, many features can be added to this project. The first feature to add is the ability to track user's progress and to save their favorite workouts. Another addition would be a timer for every workout, with the current exercise being highlighted.
 
 ## Running Locally
 
