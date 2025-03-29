@@ -68,21 +68,20 @@ export function workoutGenerator(listOfWorkouts:Exercise[],{bodyPart, time, diff
     } else {
         afterBodyWorkout = afterTypeWorkout
     }
-
+    console.log(afterBodyWorkout)
     // filter out equipment
     
-    if (equipment?.length !== 0 && equipment!== undefined) {
-        for (let exercise of afterBodyWorkout) {
-            if (!exercise.equipment) {
-                afterEquipWorkout.push(exercise)
-            } else if (equipment.includes(exercise.equipment)) {
-                afterEquipWorkout.push(exercise)
+    if (equipment && equipment?.length > 0) {
+        afterEquipWorkout = afterBodyWorkout.filter((exercise) => {
+            if (equipment.includes('bez pomôcok')) {
+                return !exercise.equipment
+            }  else {
+                return !exercise.equipment || equipment.includes(exercise.equipment);
             }
-        }
-    } else {
-        afterEquipWorkout = afterBodyWorkout
+        })
     }
 
+    console.log(afterEquipWorkout)
     // filter out difficulty
     if(difficulty!== undefined && difficulty.length!==0) {
         if (difficulty?.includes("ľahké") && !difficulty.includes("ťažké")) {
@@ -116,7 +115,7 @@ export function workoutGenerator(listOfWorkouts:Exercise[],{bodyPart, time, diff
                 afterTimeWorkout.push(itemOfList);
                 actualTime += itemOfList.time;
             } else {
-                shuffle(afterDiffWorkout)
+                afterDiffWorkout = shuffle(afterDiffWorkout)
             }
             if (actualTime<time && afterDiffWorkout.length === afterTimeWorkout.length) {
                 return afterTimeWorkout
