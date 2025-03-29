@@ -66,9 +66,11 @@
 }
 .bold {
     font-weight: 700;
+    font-size: 1.3vw;
 }
 .bold span {
     font-weight: 400;
+    font-size: 1.2vw;
 }
 .detail-instruction .lastrow label {
     padding: 2% 0 0 2%;
@@ -80,4 +82,66 @@
     margin-top: 10%;
     margin-left: 64%;
     width: 40%;
+}
+
+@media only screen and (max-width:770px) {
+    .detail h2 {
+        font-size: 3vw;
+    }
+    .short {
+        font-size: 1.8vw;
+    }
+    .long {
+        font-size: 1.5vw;
+    }
+    .bold {
+        font-size: 1.6vw;
+    }
+    .bold span {
+        font-size: 1.4vw;
+    }
+    .detail-instruction .lastrow label {
+        font-size: 1.7vw;
+    }
+    .detail-instruction .lastrow select {
+        font-size: 1.6vw;
+    }
+}
+@media only screen and (max-width:500px) {
+    .detail h2 {
+        font-size: 3.7vw;
+    }
+    .short {
+        font-size: 2.2vw;
+    }
+    .long {
+        font-size: 2vw;
+    }
+    .bold {
+        font-size: 1.9vw;
+    }
+    .bold span {
+        font-size: 1.7vw;
+    }
+    .detail-instruction .lastrow label {
+        font-size: 1.7vw;
+    }
+    .detail-instruction .lastrow select {
+        font-size: 1.8vw;
+    }
+    .image-button img {
+        width: 95%;
+    }
+    .detail-instruction {
+        width: 105%;
+    }
+    .detail-instruction .lastrow input[type="submit"] {
+        margin-left: 30%;
+        margin-top: 6%;
+        width: 70%;
+        height: 60%;
+        font-size: 2vw;
+        padding: 3%;
+        letter-spacing: .07rem;
+    }
 }
