@@ -1,11 +1,10 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.intervalOrRepeat = intervalOrRepeat;
-exports.shuffle = shuffle;
-exports.workoutGenerator = workoutGenerator;
+exports.workoutGenerator = exports.shuffle = exports.intervalOrRepeat = void 0;
 function intervalOrRepeat() {
     return Math.random();
 }
+exports.intervalOrRepeat = intervalOrRepeat;
 function shuffle(array) {
     for (let i = array.length - 1; i > 0; i--) {
         const j = Math.floor(Math.random() * (i + 1));
@@ -13,6 +12,7 @@ function shuffle(array) {
     }
     return array;
 }
+exports.shuffle = shuffle;
 function workoutGenerator(listOfWorkouts, { bodyPart, time, difficulty, equipment, typeOfExercise }) {
     let afterTypeWorkout = [];
     let afterBodyWorkout = [];
@@ -111,3 +111,4 @@ function workoutGenerator(listOfWorkouts, { bodyPart, time, difficulty, equipmen
     afterTimeWorkout = generateFinalList(afterDiffWorkout, time);
     return [afterTimeWorkout, typeOfExercise];
 }
+exports.workoutGenerator = workoutGenerator;

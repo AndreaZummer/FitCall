@@ -9,6 +9,7 @@ import WorkoutPage from './components/WorkoutPage'
 import FilterExercise from './components/FilterExercises';
 import FilterOfExercises from './components/FilterOfExercises';
 import ListOfExercises from './components/ListOfExercises';
+import ExerciseDetail from './components/ExerciseDetail';
 
 const router = createBrowserRouter(createRoutesFromElements([
   <Route path='/' element={<LandingPage/>}>
@@ -21,6 +22,7 @@ const router = createBrowserRouter(createRoutesFromElements([
     <Route path='filter' element={<FilterExercise/>}/>
     <Route path='listofexercises' element={<FilterOfExercises/>}>
       <Route index element={<ListOfExercises/>}/>
+      <Route path=':exercisename' element={<ExerciseDetail/>}/>
     </Route>
 
   </Route>

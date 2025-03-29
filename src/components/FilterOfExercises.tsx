@@ -26,7 +26,9 @@ function FilterOfExercises() {
                 <div className="intendation"></div>
                 <div className="personal-fit" style={{backgroundImage: `url(${background})`}}>
                     <div className="overlay"></div>
-                    <h2>Moje virtuálne fitko</h2>
+                    <div className="fit">
+                        <h2>Moje virtuálne fitko</h2>
+                    </div>
                     <div className="selectedExercises">
                         {context.selected && context.selected.map((exercise) => {
                             return (

@@ -30,7 +30,7 @@
 }
 
 .containerForGenerated {
-    width: 80%;
+    width: 85%;
     background-color: #ffffffd3;
     margin: 1.5% 0;
     border-radius: 25px;
@@ -73,7 +73,7 @@
 }
 
 .exerciseName {
-    width: 12%;
+    width: 16%;
 }
 
 .exerciseBodyPart {

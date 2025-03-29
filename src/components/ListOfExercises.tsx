@@ -4,6 +4,7 @@ import "../styles/ListOfExercises.css";
 import background from '../styles/pexels-leonardho-1717096.jpg';
 import { Exercise } from "../entities";
 import { useOutletContext } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 function ListOfExercises() {
     const [selectedType, setSelectedType] = useState("interval");
@@ -81,7 +82,7 @@ function ListOfExercises() {
                                         <span id='equip'>{exercise.equipment}</span>
                                     </div>
                                 </div>
-                                    <h3>{exercise.name}</h3>
+                                    <Link to={`./${exercise.name}`}><h3>{exercise.name}</h3></Link>
                                     <p>{exercise.description}</p>
                                     <div className="lastrow">
                                         <label htmlFor={exercise.name}>Vyberte variantu</label>

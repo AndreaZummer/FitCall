@@ -1,0 +1,83 @@
+.detail { 
+    position: relative;
+    display: flex;
+    font-family: 'poppins';
+}
+
+.image-button {
+    z-index: 2;
+    width: 150%;
+}
+
+.image-button img {
+    width: 100%;
+    height: auto;
+    padding: 10% 4%;
+}
+.image-button button {
+    width: 30%;
+    margin: 4%;
+}
+.detail-instruction {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    padding: 3% 3% 3% 0;
+    z-index: 2;
+}
+.detail h2 {
+    font-size: 2vw;
+    padding-left: 2%;
+}
+.detail span {
+    display: block;
+}
+
+.detail-instruction .lastrow {
+    margin: 0;
+}
+.detail-instruction .login {
+    margin: 0;
+}
+.detail-instruction p {
+    padding: 2%;
+}
+.exercises-container .overlay {
+    background-color: #f5fadec1;
+    border-radius: 25px;
+}
+.image-button {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+.image-button .login {
+    height: 7%;
+}
+
+.short {
+    font-size: 1.2vw;
+    font-weight: 500;
+    padding: 2%;
+}
+.long {
+    font-size: 1.1vw;
+    padding: 2%;
+}
+.bold {
+    font-weight: 700;
+}
+.bold span {
+    font-weight: 400;
+}
+.detail-instruction .lastrow label {
+    padding: 2% 0 0 2%;
+    font-size: 1.4vw;
+}
+
+.detail-instruction .lastrow input[type="submit"] {
+    border-radius: 25px;
+    margin-top: 10%;
+    margin-left: 64%;
+    width: 40%;
+}
