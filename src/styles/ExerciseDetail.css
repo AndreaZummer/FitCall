@@ -134,11 +134,12 @@
     }
     .detail-instruction {
         width: 105%;
+        padding: 0;
     }
     .detail-instruction .lastrow input[type="submit"] {
-        margin: 6% 5% 6% 30%;
+        margin: 4% 10% 6% 24%;
         width: 70%;
-        height: 60%;
+        height: 46%;
         font-size: 2vw;
         padding: 2%;
         letter-spacing: .07rem;
