@@ -2,20 +2,34 @@ import { Outlet, useNavigate, useOutletContext } from "react-router-dom";
 import background from '../styles/personal-fit-background.jpg';
 import "../styles/FilterOfExercises.css";
 import { Exercise } from "../entities";
-import { useEffect } from "react";
+import { useState } from "react";
+
+type filterOfExercisesProps = {
+    finalWorkoutSetup: (finalWorkout:Exercise[]) => void,
+    selectedTypeSetup: (type: string) => void
+}
 
 function FilterOfExercises() {
 
+    const context: filterOfExercisesProps = useOutletContext();
     const navigate = useNavigate();
-    const context:{selected:Exercise[], removeHandle: (exercise:Exercise) => void, addSelected:(exercise:Exercise, type:string) => void, resetSelectedType: () => void} = useOutletContext();
+    const [selected, setSelected] = useState<Exercise[]>([]);
 
-    
-    useEffect(() => {
-        context.resetSelectedType()
-        // eslint-disable-next-line
-    }, [])
+    function addSelected(exercise:Exercise, type: string) {
+        setSelected([...selected, exercise]);
+        context.selectedTypeSetup(type)
+    }
+
+    function removeHandle(removedexercise:Exercise) {
+        setSelected(selected.filter(exercise => {
+            return removedexercise !== exercise
+        }))
+    }
+
+    const childContext = {addSelected:addSelected}
 
     function generateHandle() {
+        context.finalWorkoutSetup(selected);
         navigate('../ownworkout')
     }
 
@@ -30,23 +44,21 @@ function FilterOfExercises() {
                         <h2>Moje virtuálne fitko</h2>
                     </div>
                     <div className="selectedExercises">
-                        {context.selected && context.selected.map((exercise) => {
+                        {selected && selected.map((exercise) => {
                             return (
                                 <div className="selected-exercise" key={exercise.id}>
                                     <img alt={exercise.name} src={exercise.imageURL}/>
                                     <div className="half">
-                                        <button className="close remove" onClick={() => context.removeHandle(exercise)}>X</button>
+                                        <button className="close remove" onClick={() => removeHandle(exercise)}>X</button>
                                         <h4>{exercise.name}</h4>
                                     </div>
                                 </div>
                             )
-                        }
-                        )
-                        }
+                        })}
                     </div>
                     <button className="login" id="createExercise" onClick={generateHandle}>Vytvoriť cvičenie</button>
                 </div>
-                <Outlet context={context}/>
+                <Outlet context={childContext}/>
             </div>
         </div>
     )

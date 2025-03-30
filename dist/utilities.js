@@ -55,7 +55,6 @@ function workoutGenerator(listOfWorkouts, { bodyPart, time, difficulty, equipmen
     else {
         afterBodyWorkout = afterTypeWorkout;
     }
-    console.log(afterBodyWorkout);
     if (equipment && equipment?.length > 0) {
         afterEquipWorkout = afterBodyWorkout.filter((exercise) => {
             if (equipment.includes('bez pomôcok')) {
@@ -69,7 +68,6 @@ function workoutGenerator(listOfWorkouts, { bodyPart, time, difficulty, equipmen
     else {
         afterEquipWorkout = afterBodyWorkout;
     }
-    console.log(afterEquipWorkout);
     if (difficulty !== undefined && difficulty.length !== 0) {
         if (difficulty?.includes("ľahké") && !difficulty.includes("ťažké")) {
             afterDiffWorkout = afterEquipWorkout.filter((exercise) => {

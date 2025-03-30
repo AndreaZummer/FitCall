@@ -12,78 +12,27 @@ function Home() {
     (0, react_1.useEffect)(() => {
         window.scrollTo(0, 0);
     }, []);
-    const [bodyPartSelected, setBodyPartSelected] = (0, react_1.useState)([]);
-    const [difficultySelected, setDifficultySelected] = (0, react_1.useState)([]);
-    const [equipmentSelected, setEquipmentSelected] = (0, react_1.useState)([]);
-    const [timeSelected, setTimeSelected] = (0, react_1.useState)(0);
-    const [intervalOrRepeatSelected, setIntervalOrRepeatSelected] = (0, react_1.useState)(null);
-    const [selected, setSelected] = (0, react_1.useState)([]);
+    const [finalWorkout, setFinalWorkout] = (0, react_1.useState)([]);
+    const [intervalVsRepeat, setIntervalVsRepeat] = (0, react_1.useState)(null);
     const [selectedType, setSelectedType] = (0, react_1.useState)([]);
-    function reset() {
-        setBodyPartSelected([]);
-        setDifficultySelected([]);
-        setEquipmentSelected([]);
-        setTimeSelected(0);
-        setIntervalOrRepeatSelected(null);
-        setSelected([]);
+    function finalWorkoutSetup(finalWorkout) {
+        setFinalWorkout(finalWorkout);
+    }
+    function intervalVsRepeatSetup(intervalVsRepeat) {
+        setIntervalVsRepeat(intervalVsRepeat);
+    }
+    function selectedTypeSetup(type) {
+        setSelectedType([...selectedType, type]);
     }
     function resetSelectedType() {
         setSelectedType([]);
     }
-    function bodyPartSetup(bodyPart) {
-        if (bodyPartSelected.includes(bodyPart)) {
-            setBodyPartSelected(bodyPartSelected.filter(item => { return item !== bodyPart; }));
-        }
-        else {
-            setBodyPartSelected([...bodyPartSelected, bodyPart]);
-        }
-    }
-    function difficultySetup(difficulty) {
-        if (difficultySelected.includes(difficulty)) {
-            setDifficultySelected(difficultySelected.filter(item => { return item !== difficulty; }));
-        }
-        else {
-            setDifficultySelected([...difficultySelected, difficulty]);
-        }
-    }
-    function equipmentSetup(equipment) {
-        if (equipmentSelected.includes(equipment)) {
-            setEquipmentSelected(equipmentSelected.filter(item => { return item !== equipment; }));
-        }
-        else {
-            setEquipmentSelected([...equipmentSelected, equipment]);
-        }
-    }
-    function timeSetup(time) {
-        setTimeSelected(time);
-    }
-    function intervalOrRepeatSetup(intervalOrRepeat) {
-        setIntervalOrRepeatSelected(intervalOrRepeat);
-    }
-    function addSelected(exercise, type) {
-        setSelected([...selected, exercise]);
-        setSelectedType([...selectedType, type]);
-    }
-    function removeHandle(removedexercise) {
-        setSelected(selected.filter(exercise => {
-            return removedexercise !== exercise;
-        }));
-    }
     const context = {
-        bodyPartSetup: bodyPartSetup,
-        difficultySetup: difficultySetup,
-        equipmentSetup: equipmentSetup,
-        timeSetup: timeSetup,
-        intervalOrRepeatSetup: intervalOrRepeatSetup,
-        bodyPartSelected: bodyPartSelected,
-        difficultySelected: difficultySelected,
-        equipmentSelected: equipmentSelected,
-        timeSelected: timeSelected,
-        intervalOrRepeatSelected: intervalOrRepeatSelected,
-        reset: reset,
-        addSelected: addSelected,
-        selected: selected,
-        removeHandle: removeHandle,
+        finalWorkout: finalWorkout,
+        intervalVsRepeat: intervalVsRepeat,
+        intervalVsRepeatSetup: intervalVsRepeatSetup,
+        finalWorkoutSetup: finalWorkoutSetup,
+        selectedTypeSetup: selectedTypeSetup,
         selectedType: selectedType,
         resetSelectedType: resetSelectedType
     };

@@ -3,9 +3,15 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const jsx_runtime_1 = require("react/jsx-runtime");
 const react_router_dom_1 = require("react-router-dom");
 require("../styles/Offer.css");
+const utilities_1 = require("../utilities");
+const listOfExercises_1 = require("../data/listOfExercises");
 function Offer() {
     const navigation = (0, react_router_dom_1.useNavigate)();
+    const context = (0, react_router_dom_1.useOutletContext)();
     function generateWorkoutSurprise() {
+        const [finalWorkout, intervalVsRepeat] = (0, utilities_1.workoutGenerator)(listOfExercises_1.listOfWorkouts, {});
+        context.intervalVsRepeatSetup(intervalVsRepeat);
+        context.finalWorkoutSetup(finalWorkout);
         navigation('./surpriseworkout');
     }
     function filterWorkout() {

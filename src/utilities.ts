@@ -68,7 +68,7 @@ export function workoutGenerator(listOfWorkouts:Exercise[],{bodyPart, time, diff
     } else {
         afterBodyWorkout = afterTypeWorkout
     }
-    console.log(afterBodyWorkout)
+    
     // filter out equipment
     
     if (equipment && equipment?.length > 0) {
@@ -82,7 +82,6 @@ export function workoutGenerator(listOfWorkouts:Exercise[],{bodyPart, time, diff
     } else { 
         afterEquipWorkout = afterBodyWorkout}
 
-    console.log(afterEquipWorkout)
     // filter out difficulty
     if(difficulty!== undefined && difficulty.length!==0) {
         if (difficulty?.includes("ľahké") && !difficulty.includes("ťažké")) {

@@ -12,8 +12,9 @@ function ListOfExercises() {
     const [currentItems, setCurrentItems] = useState<Exercise[]>([]);
     const context:{addSelected:(exercise:Exercise, type: string)=> void} = useOutletContext();
 
-    window.scrollTo(0,0);
+    
     useEffect(() => {
+        window.scrollTo(0,0);
         
         function generateItems() {
             const firstItemIndex = (currentPage - 1) * 12;

@@ -1,86 +1,47 @@
 import '../styles/WorkoutPage.css';
 import { Exercise } from "../entities";
 import { useNavigate, useOutletContext, useParams,Link } from "react-router-dom";
-import { workoutGenerator } from "../utilities";
-import { listOfWorkouts } from "../data/listOfExercises";
-import { useEffect, useState } from "react";
+import { useEffect} from "react";
 import background from '../styles/group-pilates-instructors-exercising-reformers.jpg';
 
 type workoutPageProperties = {
-    bodyPartSelected?: ("brucho" | "ruky" | "nohy" | "zadok" | "kondička") [];
-    timeSelected?: number;
-    difficultySelected?: ("ľahké" | "stredné" | "ťažké")[]; 
-    equipmentSelected?: ("činky" | "expander" | "kettlebell" | "slider" | "bez pomôcok")[];
-    intervalOrRepeatSelected?: "interval" | "opakovania" | null | undefined;
-    reset: () => void;
-    selected: Exercise[];
-    selectedType: string[];
+    finalWorkout: Exercise[],
+    intervalVsRepeat: "interval" | "opakovania" | null,
+    finalWorkoutSetup: (modifyWorkout:Exercise[]) => void,
+    selectedType: string[],
     resetSelectedType: () => void
 }
 
 function WorkoutPage() {
 
     const context: workoutPageProperties = useOutletContext();
-    let bodyPart = context.bodyPartSelected;
-    let time = context.timeSelected;
-    let difficulty = context.difficultySelected;
-    let equipment = context.equipmentSelected;
-    let typeOfExercise = context.intervalOrRepeatSelected;
-    
-    const params = useParams();
-    const {choice} = params;
-    const {username} = params;
     const navigate = useNavigate();
-    const [finalWorkout, setFinalWorkout] = useState<Exercise[]> ([]);
-    const [intervalVsRepeat, setIntervalVsRepeat] = useState<"interval" | "opakovania" | null> (null);
-    const selectedType = context.selectedType;
-
+    const params = useParams();
+    const {username} = params;
 
     useEffect(() => {
         
         window.scrollTo(0,0);
-        // Surprise workout
-        if (choice === "surpriseworkout") {
-            const [finalWorkout, intervalVsRepeat] = workoutGenerator(listOfWorkouts,{});
-            setFinalWorkout(() => finalWorkout);
-            setIntervalVsRepeat(() => intervalVsRepeat);
-        } 
-
-        // Filtered workout
-        if (choice === "filteredworkout") {
-            const [finalWorkout, intervalVsRepeat] = workoutGenerator(listOfWorkouts,{bodyPart, time, difficulty, equipment, typeOfExercise});
-            setFinalWorkout(() => finalWorkout);
-            setIntervalVsRepeat(() =>intervalVsRepeat);
-            setTimeout(() => context.reset(), 1000)
-        }
-
-        // Choosen workout 
-        if (choice === "ownworkout") {
-            const finalWorkout = context.selected;
-            setFinalWorkout(() => finalWorkout);
-            setTimeout(() => context.reset(), 1000)
-        }
-        // eslint-disable-next-line
-    }, [choice]);
-
-
+    }, []);
+    
     function deleteExercise(indexToDelete: number) {
-        setFinalWorkout(workouts => workouts.filter((workout, index) => { return index!==indexToDelete}))
+        const modifyWorkout = context.finalWorkout.filter((workout, index) => { return index!==indexToDelete})
+        context.finalWorkoutSetup(modifyWorkout);
     }
 
     function typeOfExerciseHandle(index: number) {
         
-        if (selectedType.length > 0) { 
-            if (selectedType[index] === 'interval') {
+        if (context.selectedType.length > 0) { 
+            if (context.selectedType[index] === 'interval') {
                 return <span className="exerciseInter">interval</span>
             } else {return  <span className="exerciseRepeat">opakovania</span>}   
         } else {
-            return <span className="exerciseInterval">{intervalVsRepeat}</span>
+            return <span className="exerciseInterval">{context.intervalVsRepeat}</span>
         }
     }
 
     function displayIntervalOrRepeatTime(index:number,exercise:Exercise) {
-        if(intervalVsRepeat==='interval' || selectedType[index]==='interval') {
+        if(context.intervalVsRepeat==='interval' || context.selectedType[index]==='interval') {
             return <span className="exerciseInter">{exercise.interval} s</span> 
         } else {
             return <span className="exerciseRepeat">{exercise.repeat}</span>
@@ -88,8 +49,8 @@ function WorkoutPage() {
     }
 
     function homeRedirect() {
-        navigate(`/${username}`)
         context.resetSelectedType();
+        navigate(`/${username}`)
     }
 
     return (
@@ -98,7 +59,7 @@ function WorkoutPage() {
                 <div className="overlay"></div>
                 <h2>Tvoj dnešný tréning</h2>
                 <div className="containerForGenerated" >
-                    {finalWorkout.map((exercise,index) => {
+                    {context.finalWorkout.map((exercise,index) => {
                         return (
                             <div key={index} className={`generatedDetail`}>
                                 <img alt ={exercise.name} src={exercise.imageURL}/>
