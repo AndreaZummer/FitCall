@@ -136,12 +136,11 @@
         width: 105%;
     }
     .detail-instruction .lastrow input[type="submit"] {
-        margin-left: 30%;
-        margin-top: 6%;
+        margin: 6% 5% 6% 30%;
         width: 70%;
         height: 60%;
         font-size: 2vw;
-        padding: 3%;
+        padding: 2%;
         letter-spacing: .07rem;
     }
 }

@@ -62,9 +62,9 @@
 }
 
 .deleteExercise {
-    margin: 0 1% 0 0;
+    margin: 0 2% 0 0;
     width: 4%;
-    padding: .8% 1%;
+    padding: .8% 1.2%;
 }
 
 .deleteExercise:hover {
@@ -119,6 +119,9 @@
     .generatedDetail {
         font-size: 1.5vw;
     }
+    .deleteExercise {
+        padding: .3% 1%;
+    }
 
     .generatedDetail .exerciseName {
         font-size: 1.7vw;
@@ -131,7 +134,7 @@
 
 @media only screen and (max-width:700px) {
     .deleteExercise {
-        margin: 0;
+        margin-right: 2%;
     }
 }
 
@@ -159,7 +162,9 @@
 
     .container-query {
         font-size: 2vw;
-        
+    }
+    .container-query a {
+        width: 30%;
     }
 
     .container-query .exerciseName {
@@ -186,7 +191,9 @@
     }
 
     .deleteExercise {
-        padding: 2% 5% 2% 2.5%;
+        font-size: 2.1vw;
+        padding: 1.25% 4% 1.25% 2%;
+        margin-right: 2%;
     }
 
     #finish {
@@ -205,8 +212,8 @@
     }
 
     .deleteExercise {
-        padding: 1.2% 5% 1.2% 1.5%;
-        font-size: 3.2vw;
+        padding: 1% 4.85% 1% 2%;
+        font-size: 2.7vw;
     }
 
     #finish {
