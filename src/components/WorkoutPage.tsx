@@ -1,6 +1,6 @@
 import '../styles/WorkoutPage.css';
 import { Exercise } from "../entities";
-import { useNavigate, useOutletContext, useParams } from "react-router-dom";
+import { useNavigate, useOutletContext, useParams,Link } from "react-router-dom";
 import { workoutGenerator } from "../utilities";
 import { listOfWorkouts } from "../data/listOfExercises";
 import { useEffect, useState } from "react";
@@ -103,7 +103,7 @@ function WorkoutPage() {
                             <div key={index} className={`generatedDetail`}>
                                 <img alt ={exercise.name} src={exercise.imageURL}/>
                                 <div className='container-query'>
-                                    <span className="exerciseName">{exercise.name}</span>
+                                    <Link to={`../listofexercises/${exercise.name}`}><span className="exerciseName">{exercise.name}</span></Link>
                                     <div className='container-query-detail'>
                                         <span className="exerciseBodyPart">{exercise.bodyPart.length>1? exercise.bodyPart.join(', ') : exercise.bodyPart}</span>
                                         <span className="exerciseEquipment">{exercise.equipment}</span>

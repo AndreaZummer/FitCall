@@ -11,6 +11,7 @@ const react_1 = require("react");
 const detail_background_jpg_1 = __importDefault(require("../styles/detail-background.jpg"));
 require("../styles/ExerciseDetail.css");
 function ExerciseDetail() {
+    window.scrollTo(0, 0);
     const params = (0, react_router_dom_1.useParams)();
     const { exercisename } = params;
     const navigate = (0, react_router_dom_1.useNavigate)();

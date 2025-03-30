@@ -7,7 +7,7 @@ import background from '../styles/detail-background.jpg';
 import '../styles/ExerciseDetail.css';
 
 function ExerciseDetail() {
-
+    window.scrollTo(0,0)
     const params = useParams();
     const {exercisename} = params;
     const navigate = useNavigate();

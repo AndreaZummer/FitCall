@@ -79,7 +79,8 @@ export function workoutGenerator(listOfWorkouts:Exercise[],{bodyPart, time, diff
                 return !exercise.equipment || equipment.includes(exercise.equipment);
             }
         })
-    }
+    } else { 
+        afterEquipWorkout = afterBodyWorkout}
 
     console.log(afterEquipWorkout)
     // filter out difficulty

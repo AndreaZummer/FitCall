@@ -66,6 +66,9 @@ function workoutGenerator(listOfWorkouts, { bodyPart, time, difficulty, equipmen
             }
         });
     }
+    else {
+        afterEquipWorkout = afterBodyWorkout;
+    }
     console.log(afterEquipWorkout);
     if (difficulty !== undefined && difficulty.length !== 0) {
         if (difficulty?.includes("ľahké") && !difficulty.includes("ťažké")) {

@@ -15,6 +15,7 @@ function ListOfExercises() {
     const [currentPage, setCurrentPage] = (0, react_1.useState)(1);
     const [currentItems, setCurrentItems] = (0, react_1.useState)([]);
     const context = (0, react_router_dom_1.useOutletContext)();
+    window.scrollTo(0, 0);
     (0, react_1.useEffect)(() => {
         function generateItems() {
             const firstItemIndex = (currentPage - 1) * 12;
