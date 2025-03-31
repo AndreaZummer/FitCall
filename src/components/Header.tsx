@@ -28,7 +28,7 @@ function Header() {
 
     return (
         <div className='app-header'>
-            <img id="logo" alt="logo" src={logo}/>
+            <img id="logo" alt="logo" src={logo} onClick={()=> navigate(`./`)}/>
             <img className="header-svgs" id='stop' alt="stopwatch" src={stopwatch}/>
             <img className="header-svgs" id='watch' alt="fitness watch" src={fitnnessWatch}/>
             <img className="header-svgs" id='bag' alt="bag" src={bag}/>
