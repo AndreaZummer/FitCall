@@ -99,11 +99,13 @@ function ListOfExercises() {
                     })}
                 </div>
                 <div className="paginationButtons-container">
+                    <button disabled={currentPage===1? true : false} onClick={() => setCurrentPage(1)}>{'<<'}</button>
                     <button disabled={currentPage===1? true : false} onClick={() => setCurrentPage(currentPage -1)}>{'<'}</button>
                     <div className="paginationButtons">
                         {displayButtons()}
                     </div>
                     <button disabled={currentPage * 12 > listOfWorkouts.length? true : false} onClick={() => setCurrentPage(currentPage +1)}>{'>'}</button>
+                    <button disabled={currentPage * 12 > listOfWorkouts.length? true : false} onClick={() => setCurrentPage(Math.ceil(listOfWorkouts.length / 12))}>{'>>'}</button>
                 </div>
             </div>
         </div>

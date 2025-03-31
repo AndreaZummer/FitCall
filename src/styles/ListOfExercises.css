@@ -110,7 +110,7 @@ select {
 
 .paginationButtons-container button {
     width: 4%;
-    margin: 2%;
+    margin: 2% 1%;
     z-index: 2;
     background-color: transparent;
     border: none;
