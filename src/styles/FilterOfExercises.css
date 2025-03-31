@@ -2,14 +2,9 @@
     display: flex;
 }
 
-.filter-container {
-    width: 12%;
-    padding: 12% 2% 0 2%;
-}
-
 .exercise-preview {
     width: 76%;
-    margin: 0 auto;
+    margin-left: 1%;
     display: flex;
     flex-direction: column;
 }
@@ -77,7 +72,6 @@
     flex-direction: column;
     width: 53%;
 }
-
 .half button {
     width: 20%;
     align-self: flex-end;
@@ -88,108 +82,73 @@
 .half button:hover {
     background-color: #8d8c8c;
 }
-.remove {
-    padding: 4% 0;
-}
-
 .selected-exercise h4 {
     text-align: center;
-    font-size: 1vw;
+    padding-top: 5%;
+}
+.filter-container {
+    width: 19%;
+    padding-top: 12rem;
+    margin-left: 2%;
+}
+.filter-container .menu {
+    position: relative;
+    width: 100%;
+}
+.filter-container .overlay {
+    border: none;
+    border-radius: 25px;
+}
+.menu form {
+    background-color: #ffffffd8;
+    position: relative;
+    z-index: 2;
+    border-radius: 25px;
+    border: 2px solid #ffee33;
+    width: 80%;
+}
+.search {
+    padding: 7% 5%;
+    margin: 5%;
+    margin-bottom: 15%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.search .login {
+    border-radius: 25px;
+}
+.search input[type='text'] {
+    padding: 2%;
+    background-color: #d4d3d3;
+}
+form h2 {
+    text-align: center;
+    padding: 3%;
+    letter-spacing: .1rem;
+}
+.filter .selection {
+    width: 100%;
+}
+.filter h3 {
+    width: 110%;
+    padding: 3%;
 }
 
-@media only screen and (min-width:1700px) {
-    .intendation {
-        height: 16rem;
-    }
-
-    .personal-fit {
-        height: 11rem;
-    }
-
-    .personal-fit h2 {
-        font-size: 1.1vw;
-    }
+.filter .selectionButtons {
+    width: 150%;
 }
-
-@media only screen and (max-width:1250px) {
-    .intendation {
-        height: 9rem;
-    }
+.filter .button {
+    width: 100%;
 }
-
-@media only screen and (max-width:950px) {
-    .personal-fit {
-        height: 6rem;
-    }
-    .personal-fit img {
-        width: 47%;
-    }
-    .selected-exercise {
-        width: 30%;
-    }
-    .selected-exercise h4 {
-        font-size: 1.2vw;
-    }
+.filter {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
-@media only screen and (max-width:800px) {
-    .exercise-preview {
-        width: 90%;
-    }
-
-    .personal-fit h2{
-        font-size: 2vw;
-    }
-
-    #createExercise {
-        font-size: 1.5vw;
-        width: 16%;
-    }
+.filter .selection:not(:last-child) {
+    border-bottom: 2px solid #5b5a5a;
 }
-
-@media only screen and (max-width:580px) {
-    .intendation {
-        height: 6.5rem;
-    }
-    .personal-fit h2 {
-        padding: 4.5% 1%;
-    }
-    .selected-exercise {
-        width: 30%;
-    }
-}
-
-@media only screen and (max-width:520px) {
-    .fit {
-        display: none;
-    }
-    .personal-fit {
-        flex-direction: column;
-    }
-
-    #createExercise {
-        width: 35%;
-        padding: 0 5%;
-        margin: 1% 0;
-        height: 20%;
-        letter-spacing: .3vw;
-    }
-
-    .selectedExercises {
-        width: 90%;
-    }
-    .selected-exercise {
-        width: 37%;
-    }
-    .selected-exercise h4 {
-        font-size: 2vw;
-    }
-}
-
-@media only screen and (max-width:375px) {
-    #createExercise {
-        font-size: 2vw;
-    }
-    .selectedExercises {
-        margin-top: 2%;
-    }
+.filter button {
+    margin-top: 15%;
 }
