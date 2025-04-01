@@ -82,13 +82,16 @@
 .half button:hover {
     background-color: #8d8c8c;
 }
+.remove {
+    padding: 4% 0;
+}
 .selected-exercise h4 {
     text-align: center;
     padding-top: 5%;
+    font-size: 1vw;
 }
 .filter-container {
-    width: 19%;
-    padding-top: 12rem;
+    width: 100%;
     margin-left: 2%;
 }
 .filter-container .menu {
@@ -121,34 +124,240 @@
 .search input[type='text'] {
     padding: 2%;
     background-color: #d4d3d3;
+    width: 100%;
+    font-size: 1.1vw;
 }
 form h2 {
     text-align: center;
     padding: 3%;
     letter-spacing: .1rem;
+    font-size: 1.6vw;
 }
 .filter .selection {
     width: 100%;
 }
 .filter h3 {
     width: 110%;
-    padding: 3%;
+    padding: 5%;
+    text-align: left;
+    text-decoration: underline;
 }
 
-.filter .selectionButtons {
-    width: 150%;
-}
-.filter .button {
-    width: 100%;
-}
 .filter {
     display: flex;
     flex-direction: column;
     align-items: center;
 }
 .filter .selection:not(:last-child) {
-    border-bottom: 2px solid #5b5a5a;
+    border-bottom: none;
 }
 .filter button {
     margin-top: 15%;
+}
+.filter .inputLabel {
+    width: 130%;
+}
+.filter .selection {
+    flex-direction: column;
+}
+.filter .button {
+    border: none;
+    background-color: transparent;
+    width: 70%;
+    padding: 2%;
+    text-align: left;
+}
+.filter .button:hover {
+    background-color: #5b5a5a;
+}
+.filterMedia {
+    display: none;
+}
+
+@media only screen and (min-width:1700px) {
+    .intendation {
+        height: 16rem;
+    }
+
+    .personal-fit {
+        height: 11rem;
+    }
+
+    .personal-fit h2 {
+        font-size: 1.1vw;
+    }
+}
+
+@media only screen and (max-width:1250px) {
+    .intendation {
+        height: 9rem;
+    }
+}
+
+@media only screen and (max-width:950px) {
+    .personal-fit {
+        height: 6rem;
+    }
+    .personal-fit img {
+        width: 47%;
+    }
+    .selected-exercise {
+        width: 30%;
+    }
+    .selected-exercise h4 {
+        font-size: 1.2vw;
+    }
+}
+@media only screen and (max-width:800px) {
+    .exercise-preview {
+        width: 90%;
+    }
+
+    .personal-fit h2{
+        font-size: 2vw;
+    }
+    .filter .login {
+        font-size: 1.4vw;
+    }
+    .search .login {
+        font-size: 1.4vw;
+    }
+    .menu form {
+        width: 90%;
+    }
+    #createExercise {
+        font-size: 1.5vw;
+        width: 16%;
+    }
+}
+
+@media only screen and (max-width:600px) {
+    .filterMedia {
+        display: block;
+    }
+    .filterMedia .intendation {
+        display: none;
+    }
+    .filterDefault {
+        display: none;
+    }
+    .exercise-preview {
+        margin: 0 auto;
+    }
+    .filter-container {
+        width: 100%;
+        margin: 2% 0;
+    }
+    .menu {
+        flex-direction: row;
+    }
+    .filter {
+        flex-direction: row;
+    }
+    .menu .search {
+        margin: 1%;
+        padding: 2%;
+        width: 30%;
+    }
+    .search input[type='text'] {
+        font-size: 1.35vw;
+    }
+    .filter h2 {
+        display: none;
+    }
+    .filter {
+        align-items: flex-start;
+    }
+    .filter .selection {
+        padding: 2%;
+    }
+    .filter .selection h3 {
+        font-size: 1.9vw;
+    }
+    .filter .selection .button {
+        font-size: 1.5vw;
+    }
+    .filter .login {
+        margin: 2%;
+        margin-left: .4%;
+        align-self: flex-end;
+        width: 40%;
+    }
+    .firstSelection .selectionButtons{
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+    }
+}
+
+@media only screen and (max-width:580px) {
+    .intendation {
+        height: 6.5rem;
+    }
+    .personal-fit h2 {
+        padding: 4.5% 1%;
+    }
+    .selected-exercise {
+        width: 30%;
+    }
+}
+
+@media only screen and (max-width:520px) {
+    .fit {
+        display: none;
+    }
+    .personal-fit {
+        flex-direction: column;
+    }
+    #createExercise {
+        width: 35%;
+        padding: 0 5%;
+        margin: 1% 0;
+        height: 20%;
+        letter-spacing: .3vw;
+    }
+    .selectedExercises {
+        width: 90%;
+    }
+    .selected-exercise {
+        width: 37%;
+    }
+    .selected-exercise h4 {
+        font-size: 2vw;
+    }
+    .filter .selection .button {
+        font-size: 1.9vw;
+    }
+}
+
+@media only screen and (max-width:375px) {
+    #createExercise {
+        font-size: 2vw;
+    }
+    .selectedExercises {
+        margin-top: 2%;
+    }
+    .search input[type='text'] {
+        font-size: 2.1vw;
+    }
+    .search .login {
+        font-size: 1.9vw;
+        margin-top: 13%;
+        width: 86%;
+    }
+    .menu .search {
+        padding: 5% 4%;
+    }
+    .filter .login {
+        font-size: 2vw;
+        position: relative;
+        right: 6%;
+    }
+    .filter .selection .button {
+        font-size: 2.3vw;
+    }
+    .menu .search {
+        padding: 4%;
+    }
+
 }
