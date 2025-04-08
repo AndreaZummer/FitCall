@@ -1,15 +1,15 @@
 import './App.css';
 import { Route, RouterProvider, createBrowserRouter, createRoutesFromElements} from 'react-router-dom';
-import Login from './components/Login';
-import LandingPage from './components/LandingPage';
-import SignUp from './components/SignUp';
-import Home from './components/Home';
-import Offer from './components/Offer';
-import WorkoutPage from './components/WorkoutPage'
-import FilterExercise from './components/FilterExercises';
-import FilterOfExercises from './components/FilterOfExercises';
-import ListOfExercises from './components/ListOfExercises';
-import ExerciseDetail from './components/ExerciseDetail';
+import Login from '../components/Login';
+import LandingPage from '../components/LandingPage';
+import SignUp from '../components/SignUp';
+import Home from '../components/Home';
+import Offer from '../components/Offer';
+import WorkoutPage from '../components/WorkoutPage'
+import FilterExercise from '../components/FilterExercises';
+import FilterOfExercises from '../components/FilterOfExercises';
+import ListOfExercises from '../components/ListOfExercises';
+import ExerciseDetail from '../components/ExerciseDetail';
 
 const router = createBrowserRouter(createRoutesFromElements([
   <Route path='/' element={<LandingPage/>}>
