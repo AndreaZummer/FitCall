@@ -1,9 +1,12 @@
-import { useNavigate, useOutletContext } from 'react-router-dom';
+import { useNavigate, useOutletContext} from 'react-router-dom';
 import background from '../styles/filter-background.jpg';
+import store from '../app/store';
 import '../styles/FilterExercise.css';
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import { listOfWorkouts } from '../data/listOfExercises';
 import { workoutGenerator } from '../utilities';
+import { useDispatch, useSelector } from 'react-redux';
+import { addBodyPart, addDifficulty, addEquipment, addTime, addTypeOfExercise, deleteBodyPart, deleteDifficulty, deleteEquipment} from './filterExerciseSlice';
 import { Exercise } from '../entities';
 
 type filterProperties = {
@@ -13,13 +16,10 @@ type filterProperties = {
 
 function FilterExercise() {
 
-    const context: filterProperties = useOutletContext();
     const navigate = useNavigate();
-    const [bodyPart, setBodyPart] = useState<("brucho" | "ruky" | "nohy" | "zadok" | "kondička")[]>([]);
-    const [difficulty, setDifficulty] = useState<("ľahké" | "stredné" | "ťažké")[]>([]);
-    const [equipment, setEquipment] = useState<("činky" | "expander" | "kettlebell" | "slider" | "bez pomôcok")[]>([]);
-    const [time, setTime] = useState(0);
-    const [typeOfExercise, setTypeOfExercise] = useState<"interval" | "opakovania" | null | undefined>(null);
+    const dispatch = useDispatch();
+    const context: filterProperties = useOutletContext();
+    const {bodyPart, difficulty, equipment, time, typeOfExercise} = useSelector(() => store.getState().filterExercise);
 
     useEffect(() => {
         window.scrollTo(0,0);
@@ -27,50 +27,32 @@ function FilterExercise() {
 
     function bodyPartSetup(part: "brucho" | "ruky" | "nohy" | "zadok" | "kondička") {
         if(bodyPart.includes(part)) {
-            setBodyPart(
-                bodyPart.filter(item => {return  item!==part})
-            )
+            dispatch(deleteBodyPart(part))
         } else {
-            setBodyPart([...bodyPart, part])
+            dispatch(addBodyPart(part))
         }
     }
 
     function difficultySetup(diff: "ľahké" | "stredné" | "ťažké") {
         if(difficulty.includes(diff)) {
-            setDifficulty(
-                difficulty.filter(item => {return  item!==diff})
-            )
+            dispatch(deleteDifficulty(diff))
         } else {
-            setDifficulty([...difficulty, diff])
+            dispatch(addDifficulty(diff))
         }
     }
 
     function equipmentSetup(equip: "činky" | "expander" | "kettlebell" | "slider" | "bez pomôcok") {
         if(equipment.includes(equip)) {
-            setEquipment(
-                equipment.filter(item => {return  item!==equip})
-            )
+            dispatch(deleteEquipment(equip))
         } else {
-            setEquipment([...equipment, equip])
+            dispatch(addEquipment(equip))
         }
-    }
-    function timeSetup(time: number) {
-        setTime(time)
-    }
-    
-    function reset() {
-        setBodyPart([]);
-        setDifficulty([]);
-        setEquipment([]);
-        setTime(0);
-        setTypeOfExercise(null);
     }
 
     function filterWorkout() {
         const [finalWorkout, intervalVsRepeat] = workoutGenerator(listOfWorkouts,{bodyPart, time, difficulty, equipment, typeOfExercise});
         context.finalWorkoutSetup(finalWorkout);
         context.intervalVsRepeatSetup(intervalVsRepeat);
-        reset();
         navigate('../filteredworkout')
     }
 
@@ -83,24 +65,24 @@ function FilterExercise() {
                     <div className='selection'>
                         <h3>Čo dnes cvičíme?</h3>
                         <div className='selectionButtons'>
-                            <div className='inputLabel' onClick={() => {bodyPartSetup('ruky')}}>
-                                <input id='1' type='checkbox'/>
+                            <div className='inputLabel' >
+                                <input id='1' type='checkbox' onChange={() => {bodyPartSetup('ruky')}}/>
                                 <label htmlFor='1' className='button'>Ruky</label>
                             </div>
-                            <div className='inputLabel' onClick={() => {bodyPartSetup('nohy')}}>
-                                <input id='2' type='checkbox'/>
+                            <div className='inputLabel'>
+                                <input id='2' type='checkbox' onChange={() => {bodyPartSetup('nohy')}}/>
                                 <label htmlFor='2' className='button'>Nohy</label>
                             </div>
-                            <div className='inputLabel' onClick={() => {bodyPartSetup('zadok')}}>
-                                <input id='3' type='checkbox'/>
+                            <div className='inputLabel' >
+                                <input id='3' type='checkbox' onChange={() => {bodyPartSetup('zadok')}}/>
                                 <label htmlFor='3' className='button'>Zadok</label>
                             </div>
-                            <div className='inputLabel' onClick={() => {bodyPartSetup('brucho')}}>
-                                <input id='4' type='checkbox'/>
+                            <div className='inputLabel'>
+                                <input id='4' type='checkbox' onChange={() => {bodyPartSetup('brucho')}}/>
                                 <label htmlFor='4' className='button'>Brucho</label>
                             </div>
-                            <div className='inputLabel' onClick={() => {bodyPartSetup('kondička')}}>
-                                <input id='5' type='checkbox'/>
+                            <div className='inputLabel'>
+                                <input id='5' type='checkbox'onChange={() => {bodyPartSetup('kondička')}}/>
                                 <label htmlFor='5' className='button tooLong'>Kondička</label>
                             </div>
                         </div>
@@ -108,16 +90,16 @@ function FilterExercise() {
                     <div className='selection'>
                         <h3>Náročnosť?</h3>
                         <div className='selectionButtons'>
-                            <div className='inputLabel' onClick={() => {difficultySetup('ľahké')}}>
-                                <input id='6' type='checkbox'/>
+                            <div className='inputLabel'>
+                                <input id='6' type='checkbox' onChange={() => {difficultySetup('ľahké')}}/>
                                 <label htmlFor='6' className='button'>Ľahké</label>
                             </div>
-                            <div className='inputLabel' onClick={() => {difficultySetup('stredné')}}>
-                                <input id='7' type='checkbox'/>
+                            <div className='inputLabel'>
+                                <input id='7' type='checkbox' onChange={() => {difficultySetup('stredné')}}/>
                                 <label htmlFor='7' className='button'>Stredné</label>
                             </div>
-                            <div className='inputLabel' onClick={() => {difficultySetup('ťažké')}}>
-                                <input id='8' type='checkbox'/>
+                            <div className='inputLabel' >
+                                <input id='8' type='checkbox' onChange={() => {difficultySetup('ťažké')}}/>
                                 <label htmlFor='8' className='button'>Ťažké</label>
                             </div>
                         </div>
@@ -125,24 +107,24 @@ function FilterExercise() {
                     <div className='selection'>
                         <h3>Nejaké pomôcky?</h3>
                         <div className='selectionButtons'>
-                            <div className='inputLabel'  onClick={() => {equipmentSetup('kettlebell')}}>
-                                <input id='9' type='checkbox'/>
+                            <div className='inputLabel'>
+                                <input id='9' type='checkbox' onChange={() => {equipmentSetup('kettlebell')}}/>
                                 <label htmlFor='9' className='button'>Kettlebell</label>
                             </div>
-                            <div className='inputLabel' onClick={() => {equipmentSetup('činky')}}>
-                                <input id='10' type='checkbox'/>
+                            <div className='inputLabel' >
+                                <input id='10' type='checkbox'onChange={() => {equipmentSetup('činky')}}/>
                                 <label htmlFor='10' className='button'>Činky</label>
                             </div>
-                            <div className='inputLabel' onClick={() => {equipmentSetup('slider')}}>
-                                <input id="11" type='checkbox'/>
+                            <div className='inputLabel' >
+                                <input id="11" type='checkbox' onChange={() => {equipmentSetup('slider')}}/>
                                 <label htmlFor='11' className='button'>Slider</label>
                             </div>
-                            <div className='inputLabel' onClick={() => {equipmentSetup('expander')}}>
-                                <input id='12' type='checkbox'/>
+                            <div className='inputLabel'>
+                                <input id='12' type='checkbox' onChange={() => {equipmentSetup('expander')}}/>
                                 <label htmlFor='12' className='button'>Expander</label>
                             </div>
-                            <div className='inputLabel' onClick={() => {equipmentSetup('bez pomôcok')}}>
-                                <input id='13' type='checkbox'/>
+                            <div className='inputLabel'>
+                                <input id='13' type='checkbox' onClick={() => {equipmentSetup('bez pomôcok')}}/>
                                 <label htmlFor='13' className='button'>Bez pomôcok</label>
                             </div>
                         </div>
@@ -150,16 +132,16 @@ function FilterExercise() {
                     <div className='selection'>
                         <h3>Ako dlho cvičíme?</h3>
                         <div className='selectionButtons'>
-                            <div className='inputLabel' onClick={() => {timeSetup(10)}}>
-                                <input id='14' type='checkbox'/>
+                            <div className='inputLabel' >
+                                <input id='14' type='checkbox' onChange={() => {dispatch(addTime(10))}}/>
                                 <label htmlFor='14' className='button'>10 minút</label>
                             </div>
-                            <div className='inputLabel' onClick={() => {timeSetup(20)}}>
-                                <input id='15' type='checkbox'/>
+                            <div className='inputLabel'>
+                                <input id='15' type='checkbox' onChange={() => {dispatch(addTime(20))}}/>
                                 <label htmlFor='15' className='button'>20 minút</label>
                             </div>
-                            <div className='inputLabel' onClick={() => {timeSetup(30)}}>
-                                <input id='16' type='checkbox'/>
+                            <div className='inputLabel'>
+                                <input id='16' type='checkbox' onChange={() => {dispatch(addTime(30))}}/>
                                 <label htmlFor='16' className='button'>30 minút</label>
                             </div>
                         </div>
@@ -167,12 +149,12 @@ function FilterExercise() {
                     <div className='selection'>
                         <h3>Intervaly či opakovania?</h3>
                         <div className='selectionButtons'>
-                            <div className='inputLabel' onClick={() => {setTypeOfExercise('interval')}}>
-                                <input id='17' type='checkbox'/>
+                            <div className='inputLabel' >
+                                <input id='17' type='checkbox' onChange={() => {dispatch(addTypeOfExercise('interval'))}}/>
                                 <label htmlFor='17' className='button'>Interval</label>
                             </div>
-                            <div className='inputLabel' onClick={() => {setTypeOfExercise('opakovania')}}>
-                                <input id='18' type='checkbox'/>
+                            <div className='inputLabel'>
+                                <input id='18' type='checkbox' onChange={() => {dispatch(addTypeOfExercise('opakovania'))}}/>
                                 <label htmlFor='18' className='button'>Opakovania</label>
                             </div>
                         </div>

@@ -1,44 +1,51 @@
 import '../styles/WorkoutPage.css';
 import { Exercise } from "../entities";
-import { useNavigate, useParams,Link } from "react-router-dom";
+import { useNavigate, useParams,Link, useOutletContext } from "react-router-dom";
 import { useEffect} from "react";
 import background from '../styles/group-pilates-instructors-exercising-reformers.jpg';
 import store from '../app/store';
-import { deleteWorkout, deleteExercise } from './offerSlice';
-import { useSelector } from 'react-redux';
+import { deleteWorkout} from './offerSlice';
+import { deleteFilter } from './filterExerciseSlice';
+
+
+
+type workoutPageProperties = {
+    finalWorkout: Exercise[],
+    intervalVsRepeat: "interval" | "opakovania" | null,
+    finalWorkoutSetup: (modifyWorkout:Exercise[]) => void,
+    selectedType: string[],
+    resetSelectedType: () => void
+}
 
 function WorkoutPage() {
 
     const navigate = useNavigate();
     const params = useParams();
     const {username} = params;
-    const finalWorkout = useSelector(() => store.getState().offer.finalWorkout);
-    const intervalVsRepeat = useSelector(() => store.getState().offer.intervalVsRepeat);
-    const selectedType = useSelector(() => store.getState().offer.selectedType);
-
+    const context: workoutPageProperties = useOutletContext();
 
     useEffect(() => {
         window.scrollTo(0,0);
     }, []);
     
     function deleteExerciseFromWorkout(indexToDelete: number) {
-        const modifyWorkout = finalWorkout.filter((workout, index) => { return index!==indexToDelete})
-        store.dispatch(deleteExercise(modifyWorkout))
+        const modifyWorkout = context.finalWorkout.filter((workout, index) => { return index!==indexToDelete})
+        context.finalWorkoutSetup(modifyWorkout);
     }
 
     function typeOfExerciseHandle(index: number) {
         
-        if (selectedType.length > 0) { 
-            if (selectedType[index] === 'interval') {
+        if (context.selectedType.length > 0) { 
+            if (context.selectedType[index] === 'interval') {
                 return <span className="exerciseInter">interval</span>
             } else {return  <span className="exerciseRepeat">opakovania</span>}   
         } else {
-            return <span className="exerciseInterval">{intervalVsRepeat}</span>
+            return <span className="exerciseInterval">{context.intervalVsRepeat}</span>
         }
     }
 
     function displayIntervalOrRepeatTime(index:number,exercise:Exercise) {
-        if(intervalVsRepeat==='interval' || selectedType[index]==='interval') {
+        if(context.intervalVsRepeat==='interval' || context.selectedType[index]==='interval') {
             return <span className="exerciseInter">{exercise.interval} s</span> 
         } else {
             return <span className="exerciseRepeat">{exercise.repeat}</span>
@@ -47,6 +54,7 @@ function WorkoutPage() {
 
     function homeRedirect() {
         store.dispatch(deleteWorkout())
+        store.dispatch(deleteFilter());
         navigate(`/${username}`)
     }
 
@@ -56,7 +64,7 @@ function WorkoutPage() {
                 <div className="overlay"></div>
                 <h2>Tvoj dnešný tréning</h2>
                 <div className="containerForGenerated" >
-                    {finalWorkout.map((exercise,index) => {
+                    {context.finalWorkout.map((exercise,index) => {
                         return (
                             <div key={index} className={`generatedDetail`}>
                                 <img alt ={exercise.name} src={exercise.imageURL}/>

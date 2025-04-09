@@ -1,17 +1,24 @@
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useOutletContext } from "react-router-dom";
 import '../styles/Offer.css';
 import { workoutGenerator} from "../utilities";
-import store from "../app/store";
 import { listOfWorkouts } from "../data/listOfExercises";
-import { generateSurpriseWorkout } from "./offerSlice";
+import { Exercise } from "../entities";
+
+type OfferProps = {
+    intervalVsRepeatSetup: (intervalVsRepeat: "interval" | "opakovania" | null) => void,
+    finalWorkoutSetup: (finalWorkout: Exercise[]) => void
+}
 
 function Offer() {
+
+    const context:OfferProps = useOutletContext();
     
     const navigation = useNavigate();
 
     function generateWorkoutSurprise() {
         const [finalWorkout, intervalVsRepeat] = workoutGenerator(listOfWorkouts,{});
-        store.dispatch(generateSurpriseWorkout({finalWorkout,intervalVsRepeat}))
+        context.intervalVsRepeatSetup(intervalVsRepeat);
+        context.finalWorkoutSetup(finalWorkout);
         navigation('./surpriseworkout')
     }
 

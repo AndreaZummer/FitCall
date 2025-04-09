@@ -21,7 +21,7 @@ function SignUp() {
     }
     function handleLoginSubmit(event: React.FormEvent<HTMLFormElement>) {
         event.preventDefault();
-        if (store.getState().SignUp.password!==store.getState().SignUp.confirmPassword) {
+        if (store.getState().signUp.password!==store.getState().signUp.confirmPassword) {
             alert('Heslá sa nezhodujú');
             store.dispatch(resetPasswords())
         } else {
@@ -34,9 +34,9 @@ function SignUp() {
         store.dispatch(setUserName(event.target.value))
     }
 
-    const terms = useSelector(() => store.getState().SignUp.terms);
-    const password = useSelector(() => store.getState().SignUp.password);
-    const againPassword = useSelector(() => store.getState().SignUp.confirmPassword);
+    const terms = useSelector(() => store.getState().signUp.terms);
+    const password = useSelector(() => store.getState().signUp.password);
+    const againPassword = useSelector(() => store.getState().signUp.confirmPassword);
 
     return (
         <div className="container">

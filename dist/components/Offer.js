@@ -1,20 +1,17 @@
 "use strict";
-var __importDefault = (this && this.__importDefault) || function (mod) {
-    return (mod && mod.__esModule) ? mod : { "default": mod };
-};
 Object.defineProperty(exports, "__esModule", { value: true });
 const jsx_runtime_1 = require("react/jsx-runtime");
 const react_router_dom_1 = require("react-router-dom");
 require("../styles/Offer.css");
 const utilities_1 = require("../utilities");
-const store_1 = __importDefault(require("../app/store"));
 const listOfExercises_1 = require("../data/listOfExercises");
-const offerSlice_1 = require("./offerSlice");
 function Offer() {
+    const context = (0, react_router_dom_1.useOutletContext)();
     const navigation = (0, react_router_dom_1.useNavigate)();
     function generateWorkoutSurprise() {
         const [finalWorkout, intervalVsRepeat] = (0, utilities_1.workoutGenerator)(listOfExercises_1.listOfWorkouts, {});
-        store_1.default.dispatch((0, offerSlice_1.generateSurpriseWorkout)({ finalWorkout, intervalVsRepeat }));
+        context.intervalVsRepeatSetup(intervalVsRepeat);
+        context.finalWorkoutSetup(finalWorkout);
         navigation('./surpriseworkout');
     }
     function filterWorkout() {
