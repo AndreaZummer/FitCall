@@ -13,12 +13,15 @@ const gym_bag_barrel_svgrepo_com_svg_1 = __importDefault(require("./resources/gy
 const dumbell_fitness_svgrepo_com_svg_1 = __importDefault(require("./resources/dumbell-fitness-svgrepo-com.svg"));
 const shoe_5_svgrepo_com_svg_1 = __importDefault(require("./resources/shoe-5-svgrepo-com.svg"));
 const avatar_man_profile_svgrepo_com_svg_1 = __importDefault(require("./resources/avatar-man-profile-svgrepo-com.svg"));
+const store_1 = __importDefault(require("../app/store"));
+const loginSlice_1 = require("./loginSlice");
 function Header() {
     const navigate = (0, react_router_dom_1.useNavigate)();
     const params = (0, react_router_dom_1.useParams)();
     const userName = params["username"];
     function logOutClickHandler() {
         navigate('/');
+        store_1.default.dispatch((0, loginSlice_1.logOut)());
     }
     function loginClickHandler() {
         navigate('/Login');

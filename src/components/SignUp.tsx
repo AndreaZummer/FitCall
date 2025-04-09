@@ -2,13 +2,10 @@ import { useNavigate } from "react-router-dom";
 import store from "../app/store";
 import { setUserName } from "./loginSlice";
 import { setPassword, confirmPassword, setTerms, resetPasswords } from "./signUpSlice";
+import { useSelector } from "react-redux";
 
 function SignUp() {
     const navigate = useNavigate();
-    const login = store.getState().login;
-    const password = store.getState().SignUp.password;
-    const confirmPasswordValue = store.getState().SignUp.confirmPassword;
-    const terms = store.getState().SignUp.terms;
 
 
     function passwordHandle(event: React.ChangeEvent<HTMLInputElement>) {
@@ -29,6 +26,7 @@ function SignUp() {
             store.dispatch(resetPasswords())
         } else {
             navigate(`/${store.getState().login}`)
+            store.dispatch(resetPasswords())
         }
     }
 
@@ -36,21 +34,21 @@ function SignUp() {
         store.dispatch(setUserName(event.target.value))
     }
 
-    function termsHandle() {
-        store.dispatch(setTerms())
-    }
+    const terms = useSelector(() => store.getState().SignUp.terms);
+    const password = useSelector(() => store.getState().SignUp.password);
+    const againPassword = useSelector(() => store.getState().SignUp.confirmPassword);
 
     return (
         <div className="container">
             <div className="loginField">
             <button onClick={loginClose}>X</button>
                 <form className="loginForm" onSubmit={handleLoginSubmit}>
-                    <input type="text" name='userName' placeholder="Zadajte užívateľské meno" required autoFocus={true} onChange={handleUserNameInput} value={login}/>
+                    <input type="text" name='userName' placeholder="Zadajte užívateľské meno" required autoFocus={true} onChange={handleUserNameInput} />
                     <input type="email" name="userMail" placeholder='Zadajte email' required pattern={/^[\w-.]+@([\w-]+\.)+[\w-]{2,4}$/.toString()}/>
                     <input type="password" name='password' required placeholder="Heslo" id='password' minLength={8} onChange={passwordHandle} value={password}/>
-                    <input type="password" name='password' required placeholder="Zopakujte heslo" onChange={confirmPasswordHandle} value={confirmPasswordValue}/>
+                    <input type="password" name='password' required placeholder="Zopakujte heslo" onChange={confirmPasswordHandle} value={againPassword}/>
                     <div className="terms">
-                        <input type="checkbox" name='terms' required id='terms' onClick={termsHandle}/>
+                        <input type="checkbox" name='terms' required id='terms' onClick={() => store.dispatch(setTerms())} checked={!terms? false : true}/>
                         <label htmlFor="terms">Súhlasím s podmienkami používania aplikácie FitCall</label>
                     </div>
                     <input type="submit" value='Registrovať sa' disabled={terms? false : true} id={!terms? 'disabled' : 'enable'}/>

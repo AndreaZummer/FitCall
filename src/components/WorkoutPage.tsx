@@ -1,47 +1,44 @@
 import '../styles/WorkoutPage.css';
 import { Exercise } from "../entities";
-import { useNavigate, useOutletContext, useParams,Link } from "react-router-dom";
+import { useNavigate, useParams,Link } from "react-router-dom";
 import { useEffect} from "react";
 import background from '../styles/group-pilates-instructors-exercising-reformers.jpg';
-
-type workoutPageProperties = {
-    finalWorkout: Exercise[],
-    intervalVsRepeat: "interval" | "opakovania" | null,
-    finalWorkoutSetup: (modifyWorkout:Exercise[]) => void,
-    selectedType: string[],
-    resetSelectedType: () => void
-}
+import store from '../app/store';
+import { deleteWorkout, deleteExercise } from './offerSlice';
+import { useSelector } from 'react-redux';
 
 function WorkoutPage() {
 
-    const context: workoutPageProperties = useOutletContext();
     const navigate = useNavigate();
     const params = useParams();
     const {username} = params;
+    const finalWorkout = useSelector(() => store.getState().offer.finalWorkout);
+    const intervalVsRepeat = useSelector(() => store.getState().offer.intervalVsRepeat);
+    const selectedType = useSelector(() => store.getState().offer.selectedType);
+
 
     useEffect(() => {
-        
         window.scrollTo(0,0);
     }, []);
     
-    function deleteExercise(indexToDelete: number) {
-        const modifyWorkout = context.finalWorkout.filter((workout, index) => { return index!==indexToDelete})
-        context.finalWorkoutSetup(modifyWorkout);
+    function deleteExerciseFromWorkout(indexToDelete: number) {
+        const modifyWorkout = finalWorkout.filter((workout, index) => { return index!==indexToDelete})
+        store.dispatch(deleteExercise(modifyWorkout))
     }
 
     function typeOfExerciseHandle(index: number) {
         
-        if (context.selectedType.length > 0) { 
-            if (context.selectedType[index] === 'interval') {
+        if (selectedType.length > 0) { 
+            if (selectedType[index] === 'interval') {
                 return <span className="exerciseInter">interval</span>
             } else {return  <span className="exerciseRepeat">opakovania</span>}   
         } else {
-            return <span className="exerciseInterval">{context.intervalVsRepeat}</span>
+            return <span className="exerciseInterval">{intervalVsRepeat}</span>
         }
     }
 
     function displayIntervalOrRepeatTime(index:number,exercise:Exercise) {
-        if(context.intervalVsRepeat==='interval' || context.selectedType[index]==='interval') {
+        if(intervalVsRepeat==='interval' || selectedType[index]==='interval') {
             return <span className="exerciseInter">{exercise.interval} s</span> 
         } else {
             return <span className="exerciseRepeat">{exercise.repeat}</span>
@@ -49,7 +46,7 @@ function WorkoutPage() {
     }
 
     function homeRedirect() {
-        context.resetSelectedType();
+        store.dispatch(deleteWorkout())
         navigate(`/${username}`)
     }
 
@@ -59,7 +56,7 @@ function WorkoutPage() {
                 <div className="overlay"></div>
                 <h2>Tvoj dnešný tréning</h2>
                 <div className="containerForGenerated" >
-                    {context.finalWorkout.map((exercise,index) => {
+                    {finalWorkout.map((exercise,index) => {
                         return (
                             <div key={index} className={`generatedDetail`}>
                                 <img alt ={exercise.name} src={exercise.imageURL}/>
@@ -73,7 +70,7 @@ function WorkoutPage() {
                                     {typeOfExerciseHandle(index)}
                                     <span className="exerciseSerie">{exercise.series} série</span>
                                     {displayIntervalOrRepeatTime(index,exercise)}
-                                    <button className="deleteExercise" onClick={() => deleteExercise(index)}>X</button>
+                                    <button className="deleteExercise" onClick={() => deleteExerciseFromWorkout(index)}>X</button>
                                 </div>
                             </div>    
                         )

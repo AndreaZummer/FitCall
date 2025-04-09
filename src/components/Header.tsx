@@ -8,6 +8,8 @@ import bag from './resources/gym-bag-barrel-svgrepo-com.svg';
 import dumbell from './resources/dumbell-fitness-svgrepo-com.svg';
 import shoe from './resources/shoe-5-svgrepo-com.svg';
 import avatar from './resources/avatar-man-profile-svgrepo-com.svg';
+import store from "../app/store";
+import { logOut } from "./loginSlice";
 
 function Header() {
     const navigate = useNavigate();
@@ -16,6 +18,8 @@ function Header() {
 
     function logOutClickHandler() {
         navigate('/');
+        store.dispatch(logOut())
+
     }
 
     function loginClickHandler() {

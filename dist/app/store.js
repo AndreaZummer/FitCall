@@ -6,10 +6,12 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const toolkit_1 = require("@reduxjs/toolkit");
 const loginSlice_1 = __importDefault(require("../components/loginSlice"));
 const signUpSlice_1 = __importDefault(require("../components/signUpSlice"));
+const offerSlice_1 = __importDefault(require("../components/offerSlice"));
 const store = (0, toolkit_1.configureStore)({
     reducer: {
         login: loginSlice_1.default,
-        SignUp: signUpSlice_1.default
+        SignUp: signUpSlice_1.default,
+        offer: offerSlice_1.default
     }
 });
 exports.default = store;

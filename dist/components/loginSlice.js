@@ -1,14 +1,8 @@
 "use strict";
+var _a;
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.loginSlice = exports.setUserName = void 0;
+exports.logOut = exports.setUserName = exports.loginSlice = void 0;
 const toolkit_1 = require("@reduxjs/toolkit");
-const setUserName = (userName) => {
-    return {
-        type: 'login/setUserName',
-        payload: userName
-    };
-};
-exports.setUserName = setUserName;
 exports.loginSlice = (0, toolkit_1.createSlice)({
     name: 'login',
     initialState: '',
@@ -16,9 +10,10 @@ exports.loginSlice = (0, toolkit_1.createSlice)({
         setUserName: (state, action) => {
             return action.payload;
         },
-        logOut: (state, action) => {
+        logOut: (state) => {
             return '';
         }
     }
 });
+_a = exports.loginSlice.actions, exports.setUserName = _a.setUserName, exports.logOut = _a.logOut;
 exports.default = exports.loginSlice.reducer;
