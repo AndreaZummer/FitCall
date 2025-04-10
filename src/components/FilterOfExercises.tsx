@@ -1,4 +1,4 @@
-import { Outlet, useNavigate, useOutletContext } from "react-router-dom";
+import { createSearchParams, Outlet, useNavigate, useOutletContext, useParams, useSearchParams } from "react-router-dom";
 import background from '../styles/personal-fit-background.jpg';
 import "../styles/FilterOfExercises.css";
 import { Exercise } from "../entities";
@@ -6,6 +6,7 @@ import {removeSelected} from "./filterOfExercisesSlice";
 import store from "../app/store";
 import { listOfWorkouts } from "../data/listOfExercises";
 import { useSelector } from "react-redux";
+import { setSearch, deleteSearch } from "./searchSlice";
 
 type filterOfExercisesProps = {
     finalWorkoutSetup: (finalWorkout:Exercise[]) => void,
@@ -16,7 +17,10 @@ function FilterOfExercises() {
 
     const context: filterOfExercisesProps = useOutletContext();
     const navigate = useNavigate();
+    const params = useParams();
+    const {username} = params;
     const selectedId = useSelector(() => store.getState().filterOfExercises.selected);
+    const searchTerm = useSelector(() => store.getState().search);
 
     function finalWorkoutCreate() {
         let finalWorkout: Exercise[] = [];
@@ -40,6 +44,23 @@ function FilterOfExercises() {
         store.dispatch(removeSelected({selected, selectedIndex}))
     }
 
+    function searchHandle(event: React.FormEvent<HTMLFormElement>) {
+        event.preventDefault();
+        const searchQueryParams = {
+            'search': searchTerm
+        };
+        const searchQueryString = createSearchParams(searchQueryParams);
+        navigate({
+            pathname:`/${username}/listofexercises`,
+            search: `?${searchQueryString}`
+        })
+        store.dispatch(deleteSearch())
+    }
+
+    function searchChangeHandle(event:React.ChangeEvent<HTMLInputElement>) {
+        store.dispatch(setSearch(event.target.value))
+    }
+
     function filterDisplay() {
         return (
             <div className="full-size-container"> 
@@ -47,8 +68,8 @@ function FilterOfExercises() {
                     <div className="intendation"></div>
                     <div className="menu">
                         <div className="overlay"></div>
-                            <form className="search">
-                                <input type='text' name='text' placeholder="Vyhľadať cvik..."/>
+                            <form className="search" onSubmit={searchHandle}>
+                                <input type='text' name='text' placeholder="Vyhľadať cvik..." onChange={searchChangeHandle} value={searchTerm}/>
                                 <input type="submit" className='login' value='Hľadať'/>
                             </form>
                             <form className="filter">

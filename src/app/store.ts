@@ -3,7 +3,8 @@ import loginReducer from "../components/loginSlice";
 import signUpReducer from "../components/signUpSlice";
 import offerReducer from "../components/offerSlice";
 import filterExerciseReducer from "../components/filterExerciseSlice";
-import filterOfExercisesReducer from "../components/filterOfExercisesSlice"
+import filterOfExercisesReducer from "../components/filterOfExercisesSlice";
+import searchReducer from "../components/searchSlice";
 
 const store = configureStore({
     reducer: {
@@ -11,7 +12,8 @@ const store = configureStore({
         signUp: signUpReducer,
         offer: offerReducer,
         filterExercise: filterExerciseReducer,
-        filterOfExercises: filterOfExercisesReducer
+        filterOfExercises: filterOfExercisesReducer,
+        search: searchReducer
     }
 })
 

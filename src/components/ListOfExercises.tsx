@@ -1,9 +1,9 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useMemo } from "react";
 import { listOfWorkouts } from "../data/listOfExercises";
 import "../styles/ListOfExercises.css";
 import background from '../styles/pexels-leonardho-1717096.jpg';
 import { Exercise } from "../entities";
-import { Link } from "react-router-dom";
+import { Link, useSearchParams } from "react-router-dom";
 import { addSelected } from "./filterOfExercisesSlice";
 import store from "../app/store";
 
@@ -11,23 +11,48 @@ function ListOfExercises() {
     const [selectedType, setSelectedType] = useState<"interval" | "opakovania">("interval");
     const [currentPage, setCurrentPage] = useState(1);
     const [currentItems, setCurrentItems] = useState<Exercise[]>([]);
+    const [searchParams, setSearchparams] = useSearchParams();
+    const searchTerm = searchParams.get('search')?.toLowerCase();
 
+    function generateFinalList() {
+        let finalList:Exercise[] = [];
+
+        if(!searchTerm) {
+            finalList = listOfWorkouts;
+        } else if (searchTerm) {
+            finalList = listOfWorkouts.filter(exercise => {
+                return exercise.name.toLowerCase().includes(searchTerm)
+            })
+        }
+        return finalList
+    };
+
+    const finalList = useMemo(() => {
+        if (!searchTerm) return listOfWorkouts;
+        return listOfWorkouts.filter(exercise =>
+            exercise.name.toLowerCase().includes(searchTerm)
+        );
+    }, [searchTerm]);
     
     useEffect(() => {
         window.scrollTo(0,0);
+    }, [])
+
+    useEffect(() => {
         
         function generateItems() {
             const firstItemIndex = (currentPage - 1) * 12;
-            setCurrentItems(listOfWorkouts.slice(firstItemIndex, firstItemIndex + 12 || listOfWorkouts.length - 1))
+            setCurrentItems(finalList.slice(firstItemIndex, firstItemIndex + 12));
         }
         generateItems();
+
         window.scrollTo(0,0);
-    }, [currentPage])
+    }, [currentPage,finalList])
 
     function displayButtons() {
         let currentButtons = []
 
-        if (currentPage > 1 && currentPage * 12 < listOfWorkouts.length) {
+        if (currentPage > 1 && currentPage * 12 < finalList.length) {
             for (let i = currentPage -1; i < currentPage+2; i++) {
                 if (i === currentPage) {
                     currentButtons.push(<button className="currentButton">{i}</button>)
@@ -47,7 +72,7 @@ function ListOfExercises() {
             }
         }
 
-        if(currentPage * 12 > listOfWorkouts.length) {
+        if(currentPage * 12 > finalList.length) {
             for (let i = currentPage -2; i < currentPage+1; i++) {
                 if (i === currentPage) {
                     currentButtons.push(<button className="currentButton">{i}</button>)
@@ -106,10 +131,10 @@ function ListOfExercises() {
                     <button disabled={currentPage===1? true : false} onClick={() => setCurrentPage(1)}>{'<<'}</button>
                     <button disabled={currentPage===1? true : false} onClick={() => setCurrentPage(currentPage -1)}>{'<'}</button>
                     <div className="paginationButtons">
-                        {displayButtons()}
+                        {finalList.length < 13? displayButtons()[0] : displayButtons()}
                     </div>
-                    <button disabled={currentPage * 12 > listOfWorkouts.length? true : false} onClick={() => setCurrentPage(currentPage +1)}>{'>'}</button>
-                    <button disabled={currentPage * 12 > listOfWorkouts.length? true : false} onClick={() => setCurrentPage(Math.ceil(listOfWorkouts.length / 12))}>{'>>'}</button>
+                    <button disabled={currentPage * 12 > generateFinalList().length? true : false} onClick={() => setCurrentPage(currentPage +1)}>{'>'}</button>
+                    <button disabled={currentPage * 12 > generateFinalList().length? true : false} onClick={() => setCurrentPage(Math.ceil(generateFinalList().length / 12))}>{'>>'}</button>
                 </div>
             </div>
         </div>
