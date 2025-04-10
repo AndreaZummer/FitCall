@@ -5,6 +5,7 @@ import offerReducer from "../components/offerSlice";
 import filterExerciseReducer from "../components/filterExerciseSlice";
 import filterOfExercisesReducer from "../components/filterOfExercisesSlice";
 import searchReducer from "../components/searchSlice";
+import filterResultsReducer from "../components/filterResultsSlice";
 
 const store = configureStore({
     reducer: {
@@ -13,7 +14,8 @@ const store = configureStore({
         offer: offerReducer,
         filterExercise: filterExerciseReducer,
         filterOfExercises: filterOfExercisesReducer,
-        search: searchReducer
+        search: searchReducer,
+        filterResults: filterResultsReducer
     }
 })
 
