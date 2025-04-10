@@ -11,7 +11,7 @@ function Home() {
     }, [])
     const [finalWorkout, setFinalWorkout] = useState<Exercise[]> ([]);
     const [intervalVsRepeat, setIntervalVsRepeat] = useState<"interval" | "opakovania" | null> (null);
-    const [selectedType, setSelectedType] = useState<string[]>([]);
+
 
     function finalWorkoutSetup(finalWorkout:Exercise[]) {
         setFinalWorkout(finalWorkout)
@@ -21,22 +21,12 @@ function Home() {
         setIntervalVsRepeat(intervalVsRepeat)
     }
 
-    function selectedTypeSetup(type: string) {
-        setSelectedType([...selectedType, type])
-    } 
-
-    function resetSelectedType() {
-        setSelectedType([])
-    }
-
     const context = {
         finalWorkout: finalWorkout,
         intervalVsRepeat: intervalVsRepeat,
         intervalVsRepeatSetup: intervalVsRepeatSetup,
         finalWorkoutSetup: finalWorkoutSetup,
-        selectedTypeSetup: selectedTypeSetup,
-        selectedType: selectedType,
-        resetSelectedType: resetSelectedType
+
     }
     return ( 
         <div className="landing">

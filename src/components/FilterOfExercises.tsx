@@ -2,35 +2,43 @@ import { Outlet, useNavigate, useOutletContext } from "react-router-dom";
 import background from '../styles/personal-fit-background.jpg';
 import "../styles/FilterOfExercises.css";
 import { Exercise } from "../entities";
-import { useState } from "react";
+import {removeSelected} from "./filterOfExercisesSlice";
+import store from "../app/store";
+import { listOfWorkouts } from "../data/listOfExercises";
+import { useSelector } from "react-redux";
 
 type filterOfExercisesProps = {
     finalWorkoutSetup: (finalWorkout:Exercise[]) => void,
-    selectedTypeSetup: (type: string) => void
+    selectedTypeSetup: (type: "interval" | "opakovania") => void
 }
 
 function FilterOfExercises() {
 
     const context: filterOfExercisesProps = useOutletContext();
     const navigate = useNavigate();
-    const [selected, setSelected] = useState<Exercise[]>([]);
+    const selectedId = useSelector(() => store.getState().filterOfExercises.selected);
+    const selectedType = useSelector(() => store.getState().filterOfExercises.selectedType);
 
-    function addSelected(exercise:Exercise, type: string) {
-        setSelected([...selected, exercise]);
-        context.selectedTypeSetup(type)
+    function finalWorkoutCreate() {
+        let finalWorkout: Exercise[] = [];
+        for (let item of selectedId) {
+            listOfWorkouts.forEach(exercise => {
+                if (item === exercise.id) {
+                    finalWorkout.push(exercise)
+                }
+            })
+        }
+        return finalWorkout
     }
-
-    function removeHandle(removedexercise:Exercise) {
-        setSelected(selected.filter(exercise => {
-            return removedexercise !== exercise
-        }))
-    }
-
-    const childContext = {addSelected:addSelected}
 
     function generateHandle() {
-        context.finalWorkoutSetup(selected);
+        context.finalWorkoutSetup(finalWorkoutCreate());
         navigate('../ownworkout')
+    }
+
+    function removeHandle(selected:number) {
+        const selectedIndex = selectedId.indexOf(selected)
+        store.dispatch(removeSelected({selected, selectedIndex}))
     }
 
     return (
@@ -119,12 +127,12 @@ function FilterOfExercises() {
                         <h2>Moje virtuálne fitko</h2>
                     </div>
                     <div className="selectedExercises">
-                        {selected && selected.map((exercise) => {
+                        {selectedId && finalWorkoutCreate().map((exercise) => {
                             return (
                                 <div className="selected-exercise" key={exercise.id}>
                                     <img alt={exercise.name} src={exercise.imageURL}/>
                                     <div className="half">
-                                        <button className="close remove" onClick={() => removeHandle(exercise)}>X</button>
+                                        <button className="close remove" onClick={() => removeHandle(exercise.id)}>X</button>
                                         <h4>{exercise.name}</h4>
                                     </div>
                                 </div>
@@ -133,7 +141,7 @@ function FilterOfExercises() {
                     </div>
                     <button className="login" id="createExercise" onClick={generateHandle}>Vytvoriť cvičenie</button>
                 </div>
-                <Outlet context={childContext}/>
+                <Outlet/>
             </div>
         </div>
     )

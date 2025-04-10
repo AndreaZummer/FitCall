@@ -3,14 +3,14 @@ import { listOfWorkouts } from "../data/listOfExercises";
 import "../styles/ListOfExercises.css";
 import background from '../styles/pexels-leonardho-1717096.jpg';
 import { Exercise } from "../entities";
-import { useOutletContext } from "react-router-dom";
 import { Link } from "react-router-dom";
+import { addSelected } from "./filterOfExercisesSlice";
+import store from "../app/store";
 
 function ListOfExercises() {
-    const [selectedType, setSelectedType] = useState("interval");
+    const [selectedType, setSelectedType] = useState<"interval" | "opakovania">("interval");
     const [currentPage, setCurrentPage] = useState(1);
     const [currentItems, setCurrentItems] = useState<Exercise[]>([]);
-    const context:{addSelected:(exercise:Exercise, type: string)=> void} = useOutletContext();
 
     
     useEffect(() => {
@@ -60,13 +60,17 @@ function ListOfExercises() {
         return currentButtons
     }
 
-    function addExerciseHandle(exercise:Exercise) {
-        context.addSelected(exercise, selectedType);
+    function addExerciseHandle(selected:number) {
+        const param = {selected,selectedType}
+        store.dispatch(addSelected(param))
         setSelectedType("interval")
-    }
-    
+    }   
     function inputChangeHandle(event:React.ChangeEvent<HTMLSelectElement>) {
-        setSelectedType(event.target.value);
+        if (event.target.value === 'opakovania') {
+            setSelectedType('opakovania');
+        } else {
+            setSelectedType('interval')
+        }
     }
 
     return (
@@ -92,7 +96,7 @@ function ListOfExercises() {
                                             <option value='interval'>Intervaly</option>
                                             <option value='opakovania'>Opakovania</option>
                                         </select>
-                                            <input className='login' type="submit" value='Pridať cvičenie' onClick={() => addExerciseHandle(exercise)}/>
+                                            <input className='login' type="submit" value='Pridať cvičenie' onClick={() => addExerciseHandle(exercise.id)}/>
                                     </div>
                             </div>
                         )
