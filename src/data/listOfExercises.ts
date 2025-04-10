@@ -35,6 +35,23 @@ class Workout implements Exercise {
         this.repeat = repeat;
         this.equipment = equipment;
     }
+
+    toPlainObject() {
+        return {
+            id: this.id,
+            name: this.name,
+            description: this.description,
+            detail: this.detail,
+            imageURL: this.imageURL,
+            bodyPart: this.bodyPart,
+            time: this.time,
+            difficulty: this.difficulty,
+            series: this.series,
+            interval: this.interval,
+            repeat: this.repeat,
+            equipment: this.equipment
+        }
+    }
 }
 
 const klik = new Workout(100, 'Klik', 'Základný cvik na tricepsy a prsné svalstvo.', "Východisková poloha je vo vzpore kľačmo, ale hmotnosť tela je hlavne na horných končatinách, hlava smeruje v predĺžení chrbtice a pohľad medzi ruky, nepozeráme sa na pupok ani pred seba. S nádychom ideme nadol, pohybuje sa celý trup, chrbát je rovný, neprehýbame sa v bokoch, s výdychom ideme nahor.", require("./resources/push-up.jpg"), ["ruky"], 120, "stredné", 3, 30, 10);

@@ -6,8 +6,8 @@ require("../styles/Offer.css");
 const utilities_1 = require("../utilities");
 const listOfExercises_1 = require("../data/listOfExercises");
 function Offer() {
-    const navigation = (0, react_router_dom_1.useNavigate)();
     const context = (0, react_router_dom_1.useOutletContext)();
+    const navigation = (0, react_router_dom_1.useNavigate)();
     function generateWorkoutSurprise() {
         const [finalWorkout, intervalVsRepeat] = (0, utilities_1.workoutGenerator)(listOfExercises_1.listOfWorkouts, {});
         context.intervalVsRepeatSetup(intervalVsRepeat);

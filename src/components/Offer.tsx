@@ -10,9 +10,10 @@ type OfferProps = {
 }
 
 function Offer() {
+
+    const context:OfferProps = useOutletContext();
     
     const navigation = useNavigate();
-    const context:OfferProps = useOutletContext();
 
     function generateWorkoutSurprise() {
         const [finalWorkout, intervalVsRepeat] = workoutGenerator(listOfWorkouts,{});

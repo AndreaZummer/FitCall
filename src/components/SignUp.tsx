@@ -1,19 +1,19 @@
 import { useNavigate } from "react-router-dom";
-import { useState } from "react";
+import store from "../app/store";
+import { setUserName } from "./loginSlice";
+import { setPassword, confirmPassword, setTerms, resetPasswords } from "./signUpSlice";
+import { useSelector } from "react-redux";
 
 function SignUp() {
     const navigate = useNavigate();
-    const [userName, setUsername] = useState('');
-    const [password, setPassword] = useState('');
-    const [confirmPassword, setConfirmPassword] = useState('');
-    const [terms, setTerms] = useState(false);
+
 
     function passwordHandle(event: React.ChangeEvent<HTMLInputElement>) {
-        setPassword(event.target.value)
+        store.dispatch(setPassword(event.target.value))
     }
 
     function confirmPasswordHandle(event: React.ChangeEvent<HTMLInputElement>) {
-        setConfirmPassword(event.target.value);
+        store.dispatch(confirmPassword(event.target.value));
     }
     
     function loginClose() {
@@ -21,34 +21,34 @@ function SignUp() {
     }
     function handleLoginSubmit(event: React.FormEvent<HTMLFormElement>) {
         event.preventDefault();
-        if (password!==confirmPassword) {
+        if (store.getState().signUp.password!==store.getState().signUp.confirmPassword) {
             alert('Heslá sa nezhodujú');
-            setPassword('');
-            setConfirmPassword('');
+            store.dispatch(resetPasswords())
         } else {
-            navigate(`/${userName}`)
+            navigate(`/${store.getState().login}`)
+            store.dispatch(resetPasswords())
         }
     }
 
     function handleUserNameInput(event: React.ChangeEvent<HTMLInputElement>) {
-        setUsername(event.target.value)
+        store.dispatch(setUserName(event.target.value))
     }
 
-    function termsHandle() {
-        terms? setTerms(false) : setTerms(true);
-    }
+    const terms = useSelector(() => store.getState().signUp.terms);
+    const password = useSelector(() => store.getState().signUp.password);
+    const againPassword = useSelector(() => store.getState().signUp.confirmPassword);
 
     return (
         <div className="container">
             <div className="loginField">
             <button onClick={loginClose}>X</button>
                 <form className="loginForm" onSubmit={handleLoginSubmit}>
-                    <input type="text" name='userName' placeholder="Zadajte užívateľské meno" required autoFocus={true} onChange={handleUserNameInput} value={userName}/>
+                    <input type="text" name='userName' placeholder="Zadajte užívateľské meno" required autoFocus={true} onChange={handleUserNameInput} />
                     <input type="email" name="userMail" placeholder='Zadajte email' required pattern={/^[\w-.]+@([\w-]+\.)+[\w-]{2,4}$/.toString()}/>
                     <input type="password" name='password' required placeholder="Heslo" id='password' minLength={8} onChange={passwordHandle} value={password}/>
-                    <input type="password" name='password' required placeholder="Zopakujte heslo" onChange={confirmPasswordHandle} value={confirmPassword}/>
+                    <input type="password" name='password' required placeholder="Zopakujte heslo" onChange={confirmPasswordHandle} value={againPassword}/>
                     <div className="terms">
-                        <input type="checkbox" name='terms' required id='terms' onClick={termsHandle}/>
+                        <input type="checkbox" name='terms' required id='terms' onClick={() => store.dispatch(setTerms())} checked={!terms? false : true}/>
                         <label htmlFor="terms">Súhlasím s podmienkami používania aplikácie FitCall</label>
                     </div>
                     <input type="submit" value='Registrovať sa' disabled={terms? false : true} id={!terms? 'disabled' : 'enable'}/>

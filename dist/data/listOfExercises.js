@@ -17,6 +17,22 @@ class Workout {
         this.repeat = repeat;
         this.equipment = equipment;
     }
+    toPlainObject() {
+        return {
+            id: this.id,
+            name: this.name,
+            description: this.description,
+            detail: this.detail,
+            imageURL: this.imageURL,
+            bodyPart: this.bodyPart,
+            time: this.time,
+            difficulty: this.difficulty,
+            series: this.series,
+            interval: this.interval,
+            repeat: this.repeat,
+            equipment: this.equipment
+        };
+    }
 }
 const klik = new Workout(100, 'Klik', 'Základný cvik na tricepsy a prsné svalstvo.', "Východisková poloha je vo vzpore kľačmo, ale hmotnosť tela je hlavne na horných končatinách, hlava smeruje v predĺžení chrbtice a pohľad medzi ruky, nepozeráme sa na pupok ani pred seba. S nádychom ideme nadol, pohybuje sa celý trup, chrbát je rovný, neprehýbame sa v bokoch, s výdychom ideme nahor.", require("./resources/push-up.jpg"), ["ruky"], 120, "stredné", 3, 30, 10);
 const zamknutieVSede = new Workout(101, "Zamykanie v sede", "Statický cvik na spevnenie jadra tela.", "Zo sedu s vystretými a napnutými nohami pomaly klesáme trupom k zemi, akoby sme chceli zrolovať chrbát. V bode, keď sa k zemi blíži naša krížová kosť, napneme sedacie svaly a zároveň ťaháme hrudný kôš k panve, aby sme udržali nastavenú polohu chrbta. Správnou aktiváciou všetkých svalov sa naše nohy samy zdvihnú zo zeme a telom vytvoríme akoby kolísku. Pokiaľ nohy zdvihneme zo zeme vedome, cvik nie je vykonaný korektne. V polohe zotrváme dovtedy, pokiaľ sme schopní udržať maximálne svalové napätie.", require("./resources/zamknutie v sede.jpg"), ["brucho"], 30, "ťažké", 2, 15);
