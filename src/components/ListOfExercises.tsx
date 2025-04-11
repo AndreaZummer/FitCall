@@ -11,32 +11,51 @@ function ListOfExercises() {
     const [selectedType, setSelectedType] = useState<"interval" | "opakovania">("interval");
     const [currentPage, setCurrentPage] = useState(1);
     const [currentItems, setCurrentItems] = useState<Exercise[]>([]);
-    const [searchParams, setSearchparams] = useSearchParams();
+    const [searchParams] = useSearchParams();
     const searchTerm = searchParams.get('search')?.toLowerCase();
-
-    function generateFinalList() {
-        let finalList:Exercise[] = [];
-
-        if(!searchTerm) {
-            finalList = listOfWorkouts;
-        } else if (searchTerm) {
-            finalList = listOfWorkouts.filter(exercise => {
-                return exercise.name.toLowerCase().includes(searchTerm)
-            })
-        }
-        return finalList
-    };
+    const bodyPartTerm = useMemo(() => searchParams.getAll('bodyPart'), [searchParams]);
+    const difficultyTerm = useMemo(() => searchParams.getAll('difficulty'), [searchParams]);
+    const equipmentTerm = useMemo(() => searchParams.getAll('equipment'), [searchParams]);
 
     const finalList = useMemo(() => {
-        if (!searchTerm) return listOfWorkouts;
-        return listOfWorkouts.filter(exercise =>
-            exercise.name.toLowerCase().includes(searchTerm)
-        );
-    }, [searchTerm]);
+        if (searchTerm) {
+            return listOfWorkouts.filter(exercise =>
+                exercise.name.toLowerCase().includes(searchTerm)
+            )
+        } else if (bodyPartTerm || difficultyTerm || equipmentTerm) {
+            let finalList: Exercise[]= [...listOfWorkouts];
+
+            if (bodyPartTerm.length > 0) {
+                finalList = finalList.filter(exercise => {
+                    return exercise.bodyPart.some(part => bodyPartTerm.includes(part))
+                })
+            }
+
+            if (difficultyTerm.length > 0) {
+                finalList = finalList.filter(exercise => {
+                    return difficultyTerm.includes(exercise.difficulty)
+                })
+            }
+
+            if (equipmentTerm.length > 0) {
+                finalList = finalList.filter(exercise => {
+                    return !exercise.equipment || equipmentTerm.includes(exercise.equipment)
+                })
+            }
+            return finalList;
+        } else {
+            return listOfWorkouts;
+        }
+        
+    }, [searchTerm, bodyPartTerm, difficultyTerm, equipmentTerm]);
     
     useEffect(() => {
         window.scrollTo(0,0);
-    }, [])
+    }, []);
+
+    useEffect(() => {
+        setCurrentPage(1)
+    }, [searchParams])
 
     useEffect(() => {
         
@@ -51,37 +70,29 @@ function ListOfExercises() {
 
     function displayButtons() {
         let currentButtons = []
-
-        if (currentPage > 1 && currentPage * 12 < finalList.length) {
-            for (let i = currentPage -1; i < currentPage+2; i++) {
-                if (i === currentPage) {
-                    currentButtons.push(<button className="currentButton">{i}</button>)
-                } else {
-                    currentButtons.push(<button onClick={() => setCurrentPage(i)}>{i}</button>)
-                }
-            }
-        }
+        const lastPage = Math.ceil(finalList.length / 12)
 
         if(currentPage === 1) {
-            for (let i = currentPage; i < currentPage+3; i++) {
-                if (i === currentPage) {
-                    currentButtons.push(<button className="currentButton">{i}</button>)
-                } else {
-                    currentButtons.push(<button onClick={() => setCurrentPage(i)}>{i}</button>)
-                }
+            currentButtons.push(<button className="currentButton">{currentPage}</button>)
+            if (12 < finalList.length) {
+                currentButtons.push(<button onClick={() => setCurrentPage(currentPage+1)}>{currentPage+1}</button>)
             }
-        }
-
-        if(currentPage * 12 > finalList.length) {
-            for (let i = currentPage -2; i < currentPage+1; i++) {
-                if (i === currentPage) {
-                    currentButtons.push(<button className="currentButton">{i}</button>)
-                } else {
-                    currentButtons.push(<button onClick={() => setCurrentPage(i)}>{i}</button>)
-                }
+            if (finalList.length > 24) {
+                currentButtons.push(<button onClick={() => setCurrentPage(currentPage+2)}>{currentPage+2}</button>)
             }
+        } else if (currentPage === lastPage) {
+            currentButtons.push(<button className="currentButton">{currentPage}</button>)
+            if (12 < finalList.length) {
+                currentButtons.unshift(<button onClick={() => setCurrentPage(currentPage-1)}>{currentPage-1}</button>)
+            }
+            if (finalList.length > 24) {
+                currentButtons.unshift(<button onClick={() => setCurrentPage(currentPage-2)}>{currentPage-2}</button>)
+            }
+        } else {
+            currentButtons.push(<button onClick={() => setCurrentPage(currentPage-1)}>{currentPage-1}</button>)
+            currentButtons.push(<button className="currentButton">{currentPage}</button>)
+            currentButtons.push(<button onClick={() => setCurrentPage(currentPage+1)}>{currentPage+1}</button>)
         }
-
         return currentButtons
     }
 
@@ -131,10 +142,10 @@ function ListOfExercises() {
                     <button disabled={currentPage===1? true : false} onClick={() => setCurrentPage(1)}>{'<<'}</button>
                     <button disabled={currentPage===1? true : false} onClick={() => setCurrentPage(currentPage -1)}>{'<'}</button>
                     <div className="paginationButtons">
-                        {finalList.length < 13? displayButtons()[0] : displayButtons()}
+                        {displayButtons()}
                     </div>
-                    <button disabled={currentPage * 12 > generateFinalList().length? true : false} onClick={() => setCurrentPage(currentPage +1)}>{'>'}</button>
-                    <button disabled={currentPage * 12 > generateFinalList().length? true : false} onClick={() => setCurrentPage(Math.ceil(generateFinalList().length / 12))}>{'>>'}</button>
+                    <button disabled={currentPage * 12 > finalList.length? true : false} onClick={() => setCurrentPage(currentPage +1)}>{'>'}</button>
+                    <button disabled={currentPage * 12 > finalList.length? true : false} onClick={() => setCurrentPage(Math.ceil(finalList.length / 12))}>{'>>'}</button>
                 </div>
             </div>
         </div>

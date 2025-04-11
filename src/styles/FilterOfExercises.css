@@ -247,12 +247,14 @@ form h2 {
     .filter-container {
         width: 100%;
         margin: 2% 0;
+        height: 7.4rem;
     }
     .menu {
-        flex-direction: row;
+        flex-direction: row; 
     }
     .filter {
         flex-direction: row;
+        padding-bottom: 2rem;
     }
     .menu .search {
         margin: 1%;
@@ -278,11 +280,26 @@ form h2 {
         font-size: 1.5vw;
     }
     .filter .login {
-        margin: 2%;
+        margin: 1%;
         margin-left: .4%;
         align-self: flex-end;
-        width: 40%;
+        width: 25%;
+        position: absolute;
+        height: 13%;
     }
+    #filteration {
+        translate: 125%;
+        bottom: 11.5%;
+    }
+    #deleteFilter {
+        translate: 125%;
+        top: 86%;
+        height: 10%;
+        font-size: 1.3vw;
+        letter-spacing: .2vw;
+        padding: 1%;
+    }
+
     .firstSelection .selectionButtons{
         display: flex;
         flex-direction: row;
@@ -350,8 +367,6 @@ form h2 {
     }
     .filter .login {
         font-size: 2vw;
-        position: relative;
-        right: 6%;
     }
     .filter .selection .button {
         font-size: 2.3vw;

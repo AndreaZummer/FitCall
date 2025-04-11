@@ -22,7 +22,6 @@ function FilterOfExercises() {
     const {username} = params;
     const selectedId = useSelector(() => store.getState().filterOfExercises.selected);
     const searchTerm = useSelector(() => store.getState().search);
-    const {bodyPart, difficulty, equipment} = useSelector(() => store.getState().filterExercise);
     const dispatch = useDispatch();
     const {bodyPartFilter, difficultyFilter, equipmentFilter} = useSelector(() => store.getState().filterResults);
 
@@ -66,7 +65,7 @@ function FilterOfExercises() {
     }
 
     function bodyPartSetup(part: "brucho" | "ruky" | "nohy" | "zadok" | "kondička") {
-            if(bodyPart.includes(part)) {
+            if(bodyPartFilter.includes(part)) {
                 dispatch(deleteBodyPart(part))
             } else {
                 dispatch(addBodyPart(part))
@@ -74,7 +73,7 @@ function FilterOfExercises() {
         }
     
         function difficultySetup(diff: "ľahké" | "stredné" | "ťažké") {
-            if(difficulty.includes(diff)) {
+            if(difficultyFilter.includes(diff)) {
                 dispatch(deleteDifficulty(diff))
             } else {
                 dispatch(addDifficulty(diff))
@@ -82,7 +81,7 @@ function FilterOfExercises() {
         }
     
         function equipmentSetup(equip: "činky" | "expander" | "kettlebell" | "slider") {
-            if(equipment.includes(equip)) {
+            if(equipmentFilter.includes(equip)) {
                 dispatch(deleteEquipment(equip))
             } else {
                 dispatch(addEquipment(equip))
@@ -107,6 +106,11 @@ function FilterOfExercises() {
     function prevent(event:React.FormEvent<HTMLFormElement>) {
         event.preventDefault()
     }
+
+    function filterDeleteHandle() {
+        dispatch(deleteAll())
+        navigate(`/${username}/listofexercises`)
+    }
         
 
     function filterDisplay() {
@@ -126,23 +130,23 @@ function FilterOfExercises() {
                                     <h3>Cieľová partia</h3>
                                     <div className="selectionButtons">
                                         <div className="inputLabel">
-                                            <input id='ruky' type="checkbox" onChange={() => {bodyPartSetup('ruky')}}/>
+                                            <input id='ruky' type="checkbox" onChange={() => {bodyPartSetup('ruky')}} checked={bodyPartFilter.includes('ruky')}/>
                                             <label htmlFor="ruky" className="button">Ruky</label>
                                         </div>
                                         <div className="inputLabel">
-                                            <input id='nohy' type="checkbox" onChange={() => {bodyPartSetup('nohy')}}/>
+                                            <input id='nohy' type="checkbox" onChange={() => {bodyPartSetup('nohy')}} checked={bodyPartFilter.includes('nohy')}/>
                                             <label htmlFor="nohy" className="button">Nohy</label>
                                         </div>
                                         <div className="inputLabel">
-                                            <input id='brucho' type="checkbox" onChange={() => {bodyPartSetup('brucho')}}/>
+                                            <input id='brucho' type="checkbox" onChange={() => {bodyPartSetup('brucho')}} checked={bodyPartFilter.includes('brucho')}/>
                                             <label htmlFor="brucho" className="button">Brucho</label>
                                         </div>
                                         <div className="inputLabel">
-                                            <input id='zadok' type="checkbox" onChange={() => {bodyPartSetup('zadok')}}/>
+                                            <input id='zadok' type="checkbox" onChange={() => {bodyPartSetup('zadok')}} checked={bodyPartFilter.includes('zadok')}/>
                                             <label htmlFor="zadok" className="button">Zadok</label>
                                         </div>
                                         <div className="inputLabel">
-                                            <input id='kondička' type="checkbox" onChange={() => {bodyPartSetup('kondička')}}/>
+                                            <input id='kondička' type="checkbox" onChange={() => {bodyPartSetup('kondička')}} checked={bodyPartFilter.includes('kondička')}/>
                                             <label htmlFor="kondička" className="button">Kondička</label>
                                         </div>
                                     </div>
@@ -151,15 +155,15 @@ function FilterOfExercises() {
                                     <h3>Obtiažnosť</h3>
                                     <div className="selectionButtons">
                                         <div className="inputLabel">
-                                            <input id='ľahké' type="checkbox" onChange={() => {difficultySetup('ľahké')}}/>
+                                            <input id='ľahké' type="checkbox" onChange={() => {difficultySetup('ľahké')}} checked={difficultyFilter.includes('ľahké')}/>
                                             <label htmlFor="ľahké" className="button">Ľahké</label>
                                         </div>
                                         <div className="inputLabel">
-                                            <input id='stredné' type="checkbox" onChange={() => {difficultySetup('stredné')}}/>
+                                            <input id='stredné' type="checkbox" onChange={() => {difficultySetup('stredné')}} checked={difficultyFilter.includes('stredné')}/>
                                             <label htmlFor="stredné" className="button">Stredné</label>
                                         </div>
                                         <div className="inputLabel">
-                                            <input id='ťažké' type="checkbox" onChange={() => {difficultySetup('ťažké')}}/>
+                                            <input id='ťažké' type="checkbox" onChange={() => {difficultySetup('ťažké')}}  checked={difficultyFilter.includes('ťažké')}/>
                                             <label htmlFor="ťažké" className="button">Ťažké</label>
                                         </div>
                                     </div>
@@ -168,24 +172,25 @@ function FilterOfExercises() {
                                     <h3>Pomôcky</h3>
                                     <div className="selectionButtons">
                                         <div className="inputLabel">
-                                            <input id='činky' type="checkbox" onChange={() => {equipmentSetup('činky')}}/>
+                                            <input id='činky' type="checkbox" onChange={() => {equipmentSetup('činky')}} checked={equipmentFilter.includes('činky')}/>
                                             <label htmlFor="činky" className="button">Činky</label>
                                         </div>
                                         <div className="inputLabel">
-                                            <input id='kettlebell' type="checkbox" onChange={() => {equipmentSetup('kettlebell')}}/>
+                                            <input id='kettlebell' type="checkbox" onChange={() => {equipmentSetup('kettlebell')}} checked={equipmentFilter.includes('kettlebell')}/>
                                             <label htmlFor="kettlebell" className="button">Kettlebell</label>
                                         </div>
                                         <div className="inputLabel">
-                                            <input id='expander' type="checkbox" onChange={() => {equipmentSetup('expander')}}/>
+                                            <input id='expander' type="checkbox" onChange={() => {equipmentSetup('expander')}} checked={equipmentFilter.includes('expander')}/>
                                             <label htmlFor="expander" className="button">Expander</label>
                                         </div>
                                         <div className="inputLabel">
-                                            <input id='slider' type="checkbox" onChange={() => {equipmentSetup('slider')}}/>
+                                            <input id='slider' type="checkbox" onChange={() => {equipmentSetup('slider')}} checked={equipmentFilter.includes('slider')}/>
                                             <label htmlFor="slider" className="button">Slider</label>
                                         </div>
                                     </div>
                                 </div>
-                                <button className="login" onClick={()=> filterHandle()}>Filtrovať</button>
+                                <button className="login" id="filteration" onClick={()=> filterHandle()}>Filtrovať</button>
+                                <button className="login" id="deleteFilter" onClick={()=> filterDeleteHandle()}>Zmazať filter</button>
                             </form>
                         </div>
                     </div>

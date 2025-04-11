@@ -89,6 +89,10 @@ select {
     margin-left: 14%;
 }
 
+.lastrow input[type="submit"]:hover {
+    cursor: pointer;
+} 
+
 .lastrow {
     display: flex;
     flex-wrap: wrap;
@@ -169,6 +173,9 @@ select {
 }
 
 @media only screen and (max-width:630px) {
+    .exercises-container {
+        margin: 7% 0 2%;
+    }
     .exercise-container {
         width: 40%;
     }
