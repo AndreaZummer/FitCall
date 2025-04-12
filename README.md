@@ -22,6 +22,7 @@ Random Workout Generation: For users who prefer a simpler experience, FitCall ca
 This project was built using:
 
 - React
+- Redux
 - React Routing
 
 ## Usage
